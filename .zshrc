@@ -83,7 +83,6 @@ plugins=(
   encode64
   extract
   jsontools
-  osx
   web-search
   zsh-autosuggestions
   zsh-syntax-highlighting
