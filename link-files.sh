@@ -33,7 +33,7 @@ link_files () {
         local FILE_EXISTS="true"
       fi
     else
-      echo "datei ist nicht da"
+      # File and link do not exist on destination
     fi
 
     if [[ $FILE_EXISTS == "true" ]]; then
