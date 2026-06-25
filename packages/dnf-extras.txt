@@ -1,0 +1,4 @@
+# Lines here are passed directly to `sudo dnf -y <line>`
+# Example: builddep python3
+builddep python3
+builddep ruby

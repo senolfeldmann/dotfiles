@@ -1,0 +1,142 @@
+# I would never use conditionals like this while programming,
+# this is just for readability.
+
+# Essentials
+brew "fastfetch"
+cask "font-fira-code-nerd-font" if OS.mac?
+cask "font-fira-mono-nerd-font" if OS.mac?
+brew "gcc"
+brew "git" if OS.mac?
+brew "htop" if OS.mac?
+cask "iterm2" if OS.mac?
+brew "mas" if OS.mac?
+brew "onefetch"
+brew "tealdeer"
+brew "tpm"
+brew "tmux"
+brew "zsh-autosuggestions"
+brew "zsh-history-substring-search"
+brew "zsh-syntax-highlighting"
+cask "wine-stable" if OS.mac?
+brew "winetricks" if OS.mac?
+
+# Dev
+cask "chromedriver" if OS.mac?
+brew "mise"
+
+# Dev tools
+brew "awscli"
+brew "lazydocker"
+brew "k6"
+# Kubernetes
+# brew "k3d"
+# brew "kluctl/tap/kluctl"
+brew "kubectl"
+brew "k9s"
+
+# Misc cli tools
+brew "speedtest-cli"
+brew "yt-dlp"
+
+# AI
+cask "claude-code" if OS.mac?
+brew "hf"
+brew "ollama"
+
+# GPG
+if OS.mac?
+  tap "jorgelbg/tap"
+
+  brew "gnupg"
+  brew "pinentry-mac"
+  brew "jorgelbg/tap/pinentry-touchid"
+end
+
+if OS.mac?
+  # Docker
+  brew "docker"
+  # buildx has to be manually linked into docker cli plugins
+  # mkdir -p ~/.docker/cli-plugins
+  # ln -s $(which docker-buildx) ~/.docker/cli-plugins/docker-buildx
+  brew "docker-buildx"
+  brew "docker-compose"
+  cask "rancher"
+
+  # Dev tools
+  cask "dbeaver-community"
+  cask "jetbrains-toolbox"
+  cask "postman"
+  cask "redisinsight"
+  cask "visual-studio-code"
+
+  # Dev productivity
+  cask "gitdock"
+  cask "trailer"
+
+  # System tools
+  cask "betterdisplay"
+  cask "coconutbattery"
+  cask "monitorcontrol"
+  cask "hiddenbar"
+  mas "Amphetamine", id: 937984704
+  cask "alt-tab"
+
+  # Peripherals
+  cask "cursorsense"
+  cask "sanesidebuttons"
+  # needs rosetta
+  cask "logitech-g-hub"
+  cask "mos"
+
+  # Browsers
+  cask "firefox"
+  cask "google-chrome"
+
+  # Misc
+  cask "gifox"
+  cask "windows-app"
+  cask "teamviewer"
+  cask "the-unarchiver"
+
+  # Security
+  cask "keepassxc"
+
+  # Productivity
+  cask "alfred"
+  mas "Be Focused Pro", id: 961632517
+  cask "joplin"
+  mas "Magnet", id: 441258766
+
+  # Art
+  cask "paintbrush"
+  cask "inkscape"
+
+  # Science
+  cask "scidavis"
+  # is an ipad app and can't be installed via mas yet
+  # mas "WolframAlpha classic", id: 334989259
+
+  # Multimedia
+  mas "Soundwaves", id: 1482688534
+  cask "spotify"
+  cask "vlc"
+
+  # Communication
+  mas "WhatsApp", id: 310633997
+
+  # Cloud
+  cask "nextcloud"
+
+  # VM
+  cask "crystalfetch"
+  cask "utm"
+end
+
+# Manually installed:
+# excel
+# onenote
+# outlook
+# powerpoint
+# teams
+# word
+# peazip

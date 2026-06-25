@@ -1,0 +1,154 @@
+# Interactive shell helpers. Sourced from .zshrc.
+
+# update-all: comprehensively upgrade everything installed on this machine.
+# OS-aware. Per-tool guards skip absent tools. Failures are recorded but do
+# not abort the run; an end-of-run report shows what succeeded and what failed.
+
+# __ua_step: run a single update step with banner + status tracking.
+# Records OK/FAIL into the parent-scoped __ua_ok / __ua_fail arrays so the
+# end-of-run summary can report them. A non-zero exit is captured but does
+# not abort the run — partial upgrades are still useful, and forcing an
+# abort would mean a single broken plugin manager hides every later step.
+__ua_step() {
+  local name="$1"
+  local cmd="$2"
+  print
+  print -P "%F{cyan}%B================================================================%b%f"
+  print -P "%F{cyan}%B  >>> $name%b%f"
+  print -P "%F{cyan}%B================================================================%b%f"
+  if eval "$cmd"; then
+    __ua_ok+=("$name")
+    print
+    print -P "%F{green}%B  [OK]%b%f  $name"
+  else
+    local rc=$?
+    __ua_fail+=("$name (exit $rc)")
+    print
+    print -P "%F{red}%B  [FAIL]%b%f $name (exit $rc)"
+  fi
+}
+
+# __ua_summary: print the end-of-run report. Succeeded and failed steps are
+# listed in separate blocks so a long upgrade run stays scannable. Reads the
+# __ua_ok / __ua_fail arrays populated by __ua_step.
+__ua_summary() {
+  print
+  print
+  print -P "%B================================================================%b"
+  print -P "%B  SUMMARY%b"
+  print -P "%B================================================================%b"
+  print
+  if (( ${#__ua_ok[@]} > 0 )); then
+    print -P "%F{green}%BSucceeded (${#__ua_ok[@]}):%b%f"
+    for s in $__ua_ok; do
+      print -P "  %F{green}[OK]%f   $s"
+    done
+  fi
+  if (( ${#__ua_fail[@]} > 0 )); then
+    print
+    print -P "%F{red}%BFailed (${#__ua_fail[@]}):%b%f"
+    for f in $__ua_fail; do
+      print -P "  %F{red}[FAIL]%f $f"
+    done
+    print
+  else
+    print
+    print -P "%F{green}%BAll updates completed without errors.%b%f"
+  fi
+  print
+}
+
+update-all() {
+  __ua_ok=()
+  __ua_fail=()
+
+  print -P "%F{cyan}%B::: Detecting environment...%b%f"
+
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    print -P "%F{cyan}%B::: macOS%b%f"
+    __ua_step "Homebrew (formulae)"       "brew update && brew upgrade"
+    __ua_step "Homebrew (casks --greedy)" "brew upgrade --cask --greedy"
+    if command -v mas >/dev/null 2>&1; then
+      __ua_step "Mac App Store (mas)" "mas upgrade"
+    fi
+  elif command -v dnf >/dev/null 2>&1; then
+    print -P "%F{cyan}%B::: Fedora%b%f"
+    __ua_step "dnf" "sudo dnf upgrade -y"
+    if command -v flatpak >/dev/null 2>&1; then
+      __ua_step "Flatpak" "flatpak update -y"
+    fi
+    if command -v brew >/dev/null 2>&1; then
+      __ua_step "Homebrew (formulae)" "brew update && brew upgrade"
+    fi
+  elif command -v apt-get >/dev/null 2>&1; then
+    print -P "%F{cyan}%B::: Debian/Ubuntu%b%f"
+    __ua_step "apt" "sudo apt-get update && sudo apt-get upgrade -y"
+    if command -v flatpak >/dev/null 2>&1; then
+      __ua_step "Flatpak" "flatpak update -y"
+    fi
+    if command -v brew >/dev/null 2>&1; then
+      __ua_step "Homebrew (formulae)" "brew update && brew upgrade"
+    fi
+  fi
+
+  # mise is installed via brew, so its updates are picked up by `brew upgrade`
+  # above. We only run `mise upgrade` here (no self-update) to refresh the
+  # installed runtimes per their mise.toml pinning.
+  if command -v mise >/dev/null 2>&1; then
+    __ua_step "mise (runtimes)" "mise upgrade"
+  fi
+
+  if [[ -n "$ZSH" && -d "$ZSH/tools" ]]; then
+    __ua_step "Oh My Zsh" '"$ZSH/tools/upgrade.sh"'
+  fi
+
+  # tmux Plugin Manager: prefer Homebrew-installed TPM (Şenol's setup),
+  # fall back to manual git-clone install at ~/.tmux/plugins/tpm/. The
+  # update_plugins script does not require an active tmux session.
+  local tpm_bin
+  for tpm_bin in \
+    "$(command -v brew >/dev/null 2>&1 && brew --prefix tpm 2>/dev/null)/share/tpm/bin" \
+    "$HOME/.tmux/plugins/tpm/bin"; do
+    if [[ -x "$tpm_bin/update_plugins" ]]; then
+      __ua_step "tmux plugins (TPM)" "'$tpm_bin/update_plugins' all"
+      break
+    fi
+  done
+
+  __ua_summary
+}
+
+# agent: open a Claude Code session in one of the agent personas living
+# under ~/agents/<name>/. Convention: each agent is a sibling directory in
+# the agents repo with its own persona.md and Claude config. The cd runs
+# inside a subshell so the parent shell's cwd is preserved on return.
+agent() {
+  local AGENTS_DIR="$HOME/agents"
+  local name="$1"
+  if [[ -z "$name" ]]; then
+    print -u2 "usage: agent <name>"
+    return 1
+  fi
+  local dir="$AGENTS_DIR/$name"
+  if [[ ! -d "$dir" ]]; then
+    print -u2 "no such agent: $name (looked in $dir)"
+    return 1
+  fi
+  ( cd "$dir" && claude )
+}
+
+# _agent: zsh completion helper for `agent`. Schema-based filter rather
+# than a blacklist: an entry counts as an agent iff it contains a
+# persona.md. Adding a new sibling (_shared, tools, scratch, ...) under
+# the agents repo therefore needs no change here; if the agent schema
+# ever changes, only the filter line moves.
+_agent() {
+  local AGENTS_DIR="$HOME/agents"
+  local d
+  local -a agents=()
+  for d in "$AGENTS_DIR"/*(N/); do
+    [[ -f "$d/persona.md" ]] && agents+=("${d:t}")
+  done
+  _wanted agents expl 'agent' compadd -a agents
+}
+compdef _agent agent

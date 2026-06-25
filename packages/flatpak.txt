@@ -1,0 +1,9 @@
+com.spotify.Client
+org.jdownloader.JDownloader
+net.cozic.joplin_desktop
+tv.plex.PlexDesktop
+it.mijorus.gearlever
+com.bambulab.BambuStudio
+com.rtosta.zapzap
+com.anydesk.Anydesk
+net.mediaarea.MediaInfo

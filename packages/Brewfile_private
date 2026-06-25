@@ -1,0 +1,75 @@
+if OS.mac?
+    # Runtimes
+    cask "crossover"
+
+    # Entertainment
+    cask "steam"
+    cask "playcover-community"
+
+    # Multimedia
+    cask "plex"
+    cask "iina"
+    cask "vlc"
+    mas "ApolloOne", id: 1044484672
+
+    # Engineering
+    cask "ultimaker-cura"
+
+    # Misc Tools
+    cask "balenaetcher"
+    cask "unified-remote"
+
+    # Multimedia tools
+    cask "handbrake"
+    brew "imagemagick"
+    cask "mediainfo"
+    cask "mkvtoolnix"
+
+    # Downloader
+    cask "jdownloader"
+
+    # Communication
+    cask "discord"
+    cask "thunderbird"
+
+    # System
+    cask "appcleaner"
+    cask "lulu"
+    # for nsusbloader
+    brew "libusb"
+
+    # Not available via brew
+    # filezilla
+    # nsusbloader
+
+    # Installed manually
+    # Paragon NTFS
+    # Paragon extFS
+    # Perfect privacy
+    # Inviska MKV Extract
+
+    # Installed manually via Crossover
+    # Batch Renamer Utility
+    # mp3tag
+    # Subtitle Edit
+
+    # iOS apps from mas
+    # Threes
+    # Boost 2
+    # Canabalt
+    # Smash Hit
+    # Tiny Wings
+    # Hurdler
+    # König der Mathematik
+    # GeoDefense
+
+    # Installed manually
+    # Temple Run
+    # Jetpack Joyride 2
+    # Pathfinder
+    # Photoshop
+    # Lightroom Classic
+    # Premiere
+    # Media Encoder
+    # Acrobat Pro
+end

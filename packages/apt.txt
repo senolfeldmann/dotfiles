@@ -1,0 +1,21 @@
+# base
+build-essential
+coreutils
+htop
+# needed for tmux-yank to work under linux
+xsel
+zsh
+
+#  libs
+## for ruby
+libffi-dev
+libncurses-dev
+libreadline-dev
+libyaml-dev
+zlib1g-dev
+## for python
+liblzma-dev
+tk-dev
+libbz2-dev
+libssl-dev
+libsqlite3-dev

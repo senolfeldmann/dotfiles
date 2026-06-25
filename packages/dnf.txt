@@ -1,0 +1,77 @@
+# base
+@c-development
+@development-tools
+git
+htop
+# needed for tmux-yank to work under linux
+xsel
+zsh
+# script(1), used by install-brew.sh to wrap brew in a pseudo-TTY so
+# brew's internal `sudo -k` does not kill the parent sudo cache
+util-linux-script
+# Preinstalled on Workstation/KDE spins; listed explicitly so apply.sh
+# works on a barebones Fedora install too:
+#   flatpak    -> install-flatpak.sh, tweaks/flatpak.sh
+#   fontconfig -> install-nerd-fonts.sh (fc-list / fc-cache)
+#   unzip      -> install-nerd-fonts.sh (extract Nerd Font archives)
+flatpak
+fontconfig
+unzip
+
+# libs and building
+gcc
+gcc-c++
+gdb
+lzma
+glibc-devel
+libstdc++-devel
+openssl-devel
+readline-devel
+zlib-devel
+libzstd-devel
+libffi-devel
+bzip2-devel
+xz-devel
+sqlite
+sqlite-devel
+sqlite-libs
+libuuid-devel
+gdbm-libs
+perf
+expat
+expat-devel
+mpdecimal
+python3-pip
+rustc
+iperf3
+kate
+
+# ai
+glslang
+glslc
+ninja-build
+vulkan-headers
+vulkan-loader-devel
+spirv-headers-devel
+spirv-tools-devel
+
+# handy
+https://github.com/cjpais/Handy/releases/download/v0.8.2/Handy-0.8.2-1.x86_64.rpm
+gtk-layer-shell
+ydotool
+
+# mount.cifs for the SMB shares set up in tweaks/cifs-mounts.sh
+cifs-utils
+
+# ui
+code
+gparted
+google-chrome-stable
+keepassxc
+kitty
+nextcloud-client
+remmina
+thunderbird
+
+# gaming
+steam
