@@ -1,5 +1,5 @@
 # Şenol's dotfiles
-This repo holds my dotfiles and packages. Currently, the full instructions, just like my dotfiles, are valid for macOS and Ubuntu (inside WSL2). With the exception of the apt-specific part everything should work on the distro of your choice (I use them on Fedora Workstation and Debian, too).
+This repo holds my dotfiles and packages. Currently, the full instructions, just like my dotfiles, are valid for Fedora KDE Plasma Desktop (43+), Ubuntu 24.04 LTS (inside WSL2) and macOS (currently untested). Except for the package-manager-specific parts, everything *should* work on any distribution of your choice.
 
 This repo serves multiple purposes:
 - Keeping my dotfiles in sync across devices
