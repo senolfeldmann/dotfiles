@@ -66,8 +66,8 @@ update-all() {
 
   if [[ "$OSTYPE" == "darwin"* ]]; then
     print -P "%F{cyan}%B::: macOS%b%f"
-    __ua_step "Homebrew (formulae)"       "brew update && brew upgrade"
-    __ua_step "Homebrew (casks --greedy)" "brew upgrade --cask --greedy"
+    __ua_step "Homebrew (formulae)"       "brew update && brew upgrade --yes"
+    __ua_step "Homebrew (casks --greedy)" "brew upgrade --cask --greedy --yes"
     if command -v mas >/dev/null 2>&1; then
       __ua_step "Mac App Store (mas)" "mas upgrade"
     fi
@@ -78,7 +78,7 @@ update-all() {
       __ua_step "Flatpak" "flatpak update -y"
     fi
     if command -v brew >/dev/null 2>&1; then
-      __ua_step "Homebrew (formulae)" "brew update && brew upgrade"
+      __ua_step "Homebrew (formulae)" "brew update && brew upgrade --yes"
     fi
   elif command -v apt-get >/dev/null 2>&1; then
     print -P "%F{cyan}%B::: Debian/Ubuntu%b%f"
@@ -87,7 +87,7 @@ update-all() {
       __ua_step "Flatpak" "flatpak update -y"
     fi
     if command -v brew >/dev/null 2>&1; then
-      __ua_step "Homebrew (formulae)" "brew update && brew upgrade"
+      __ua_step "Homebrew (formulae)" "brew update && brew upgrade --yes"
     fi
   fi
 
