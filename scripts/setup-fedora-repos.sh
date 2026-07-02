@@ -49,14 +49,39 @@ else
   sudo dnf config-manager addrepo --from-repofile=https://download.docker.com/linux/fedora/docker-ce.repo
 fi
 
+# Docker stopped publishing source repos for Fedora >= 43 (fedora/44/source/
+# stable 404s), and `dnf builddep` (install-dnf-extras.sh) force-enables
+# *-source repos regardless of enabled=0, then hard-fails on the 404.
+# skip_if_unavailable lets dnf tolerate the missing repos. setopt writes to
+# /etc/dnf/repos.override.d/ (survives docker-ce.repo updates) and is
+# intrinsically idempotent.
+sudo dnf config-manager setopt \
+  docker-ce-stable-source.skip_if_unavailable=1 \
+  docker-ce-test-source.skip_if_unavailable=1
+
 # Ookla repo for the official Speedtest CLI (`speedtest` in packages/dnf.txt).
-# Ookla only documents their packagecloud script as the install path; it
-# writes the .repo file we guard on. On macOS the same tool comes from the
-# teamookla/speedtest brew tap instead.
-if [[ -f /etc/yum.repos.d/ookla_speedtest-cli.repo ]]; then
-  echo "Ookla speedtest repo already present"
-else
-  echo "Setting up Ookla speedtest repo"
-  curl -fsSL https://packagecloud.io/install/repositories/ookla/speedtest-cli/script.rpm.sh | sudo bash
-fi
+# On macOS the same tool comes from the teamookla/speedtest brew tap instead.
+#
+# We write the repo file ourselves instead of running Ookla's documented
+# packagecloud script (script.rpm.sh), whose generated config is broken on
+# Fedora in three independent ways: the fedora/$releasever baseurls contain
+# zero packages (Ookla only publishes under el/*), it pins the legacy
+# sslcacert path /etc/pki/tls/certs/ca-bundle.crt that Fedora 44 removed
+# (curl error 77 on every fetch), and it sets repo_gpgcheck=1 while the
+# gpgkey URL no longer serves the key that actually signs the metadata
+# (repomd signed by 8E61C2AB9A6D1557, URL serves E723ACAA -> permanent
+# "Signing key not found"). Hence: el/9 baseurl (the RHEL 9 build runs fine
+# on current Fedora), no repo_gpgcheck. Packages are unsigned upstream
+# anyway (gpgcheck=0 in Ookla's own config), so TLS to packagecloud.io is
+# the trust anchor, exactly as with the upstream script.
+#
+# priority=90 (default 99, lowest value wins regardless of version): Fedora
+# ships an unrelated GTK librespeed app also named `speedtest` with a higher
+# version number, which would otherwise shadow Ookla's CLI.
+#
+# Unconditional tee (no presence guard): overwrites broken configs written
+# by the packagecloud script on machines set up before this fix; content is
+# static, so repeated applies are byte-identical.
+echo "Setting up Ookla speedtest repo"
+echo -e "[ookla_speedtest-cli]\nname=Ookla Speedtest CLI (el/9 build)\nbaseurl=https://packagecloud.io/ookla/speedtest-cli/el/9/\$basearch\nenabled=1\ngpgcheck=0\nrepo_gpgcheck=0\npriority=90" | sudo tee /etc/yum.repos.d/ookla_speedtest-cli.repo > /dev/null
 
