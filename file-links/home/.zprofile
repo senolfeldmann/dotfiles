@@ -27,6 +27,10 @@ fi
 # opencode
 export PATH="$HOME/.opencode/bin:$PATH"
 
+# tealdeer reads ~/Library/Application Support on macOS by default; pin the
+# config dir so both OSes use the one file linked from file-links/config/.
+export TEALDEER_CONFIG_DIR="$HOME/.config/tealdeer"
+
 # Rancher Desktop CLIs (docker, buildx, compose, kubectl, nerdctl, helm).
 # Path Management in the app is set to "Manual" (see packages/Brewfile) so
 # it never edits symlinked shell files; the PATH entry lives here instead,
