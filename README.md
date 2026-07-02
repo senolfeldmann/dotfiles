@@ -153,7 +153,9 @@ Each step is wrapped in a clearly delimited section header (bold cyan banner) an
 | Oh My Zsh                   | ✓     | ✓      | ✓              |
 | tmux Plugin Manager (TPM)   | ✓     | ✓      | ✓              |
 
-Deliberately **not** covered: macOS system updates (`softwareupdate`). They need sudo, can force a reboot mid-run, and are better left to System Settings' auto-update - the Fedora equivalence (where `dnf upgrade` covers the OS) ends there. Also out of scope: apps installed outside any manager (Adobe suite, Paragon drivers, CrossOver bottles) and self-updating installers (Claude Code, Ollama on Linux); they keep themselves current.
+The `--greedy` flag is deliberate policy, not an oversight: casks marked `auto_updates` are upgraded by brew too. In-app auto-updaters are switched off wherever the app has a setting for it (same for App Store auto-updates), so `update-all` is the single update path for everything brew and mas manage. Apps whose self-updater cannot be disabled keep updating themselves; `--greedy` simply reconciles brew's metadata with reality on the next run.
+
+Deliberately **not** covered: macOS system updates (`softwareupdate`). They need sudo, can force a reboot mid-run, and are better left to System Settings' auto-update - the Fedora equivalence (where `dnf upgrade` covers the OS) ends there. Also out of scope: apps installed outside any manager (e.g. CrossOver bottles) and self-updating application installed via native installers (e.g. Claude Code); they keep themselves current.
 
 This is distinct from `apply.sh`: `update-all` upgrades versions of installed software, while `apply.sh` syncs the machine to the repo's package lists, symlinks, and tweaks. Both are safe to run any time; typical sequence after a `git pull` is `./scripts/apply.sh && update-all` (or run them separately depending on intent).
 

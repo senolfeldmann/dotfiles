@@ -16,8 +16,6 @@ brew "tmux"
 brew "zsh-autosuggestions"
 brew "zsh-history-substring-search"
 brew "zsh-syntax-highlighting"
-cask "wine-stable" if OS.mac?
-brew "winetricks" if OS.mac?
 
 # Dev
 cask "chromedriver" if OS.mac?
@@ -73,7 +71,6 @@ if OS.mac?
   cask "visual-studio-code"
 
   # Dev productivity
-  cask "gitdock"
   cask "trailer"
 
   # System tools
@@ -116,7 +113,10 @@ if OS.mac?
   cask "inkscape"
 
   # Science
-  cask "scidavis"
+  cask "labplot"
+  # cask is deprecated (upstream dmg is unsigned, fails Gatekeeper);
+  # expect a right-click-open on first launch
+  cask "veusz"
   # is an ipad app and can't be installed via mas yet
   # mas "WolframAlpha classic", id: 334989259
 
@@ -125,6 +125,7 @@ if OS.mac?
   cask "spotify"
 
   # Communication
+  cask "microsoft-teams"
   mas "WhatsApp", id: 310633997
 
   # Cloud
@@ -140,6 +141,5 @@ end
 # onenote
 # outlook
 # powerpoint
-# teams
 # word
 # peazip

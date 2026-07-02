@@ -69,6 +69,8 @@ update-all() {
     # --formula keeps step 1 to formulae only: a bare `brew upgrade` would
     # also upgrade non-greedy casks and blur the two steps into each other.
     __ua_step "Homebrew (formulae)"       "brew update && brew upgrade --formula --yes"
+    # --greedy is deliberate policy: in-app auto-updates are disabled where
+    # the app allows it, brew is the single update path for casks.
     __ua_step "Homebrew (casks --greedy)" "brew upgrade --cask --greedy --yes"
     if command -v mas >/dev/null 2>&1; then
       __ua_step "Mac App Store (mas)" "mas upgrade"

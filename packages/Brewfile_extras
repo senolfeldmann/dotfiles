@@ -6,9 +6,12 @@ brew "mkvtoolnix"
 
 if OS.mac?
     # Runtimes
+    # app is native, but translating x86 Windows code needs rosetta
+    # (native arm64 build announced for CrossOver 27, not shipped yet)
     cask "crossover"
 
     # Entertainment
+    # client is native since mid-2025; x86 games still run under rosetta
     cask "steam"
     cask "playcover-community"
 
@@ -23,13 +26,13 @@ if OS.mac?
 
     # Misc Tools
     cask "balenaetcher"
-    cask "unified-remote"
 
     # Multimedia tools
     cask "handbrake"
     cask "mediainfo"
     # GUI app; the CLI tools come from the cross-platform formula above
     cask "mkvtoolnix"
+    cask "mp3tag"
 
     # Downloader
     cask "jdownloader"
@@ -40,6 +43,10 @@ if OS.mac?
     # System
     cask "appcleaner"
     cask "lulu"
+    # both ship a kext: one-time Reduced Security + kext approval in
+    # RecoveryOS required; license activation stays manual
+    cask "paragon-ntfs"
+    cask "paragon-extfs"
     # for nsusbloader
     brew "libusb"
 
@@ -48,14 +55,10 @@ if OS.mac?
     # nsusbloader
 
     # Installed manually
-    # Paragon NTFS
-    # Paragon extFS
-    # Perfect privacy
-    # Inviska MKV Extract
+    # Perfect privacy (take the ARM pkg, not the Intel one)
 
     # Installed manually via Crossover
     # Batch Renamer Utility
-    # mp3tag
     # Subtitle Edit
 
     # iOS apps from mas
