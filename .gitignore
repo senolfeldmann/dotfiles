@@ -1,3 +1,4 @@
 Brewfile.lock.json
 Brewfile_extras.lock.json
 Brewfile_work.lock.json
+.DS_Store

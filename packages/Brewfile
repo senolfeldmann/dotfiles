@@ -67,7 +67,7 @@ if OS.mac?
   cask "dbeaver-community"
   cask "jetbrains-toolbox"
   cask "postman"
-  cask "redisinsight"
+  cask "redis-insight"
   cask "visual-studio-code"
 
   # Dev productivity

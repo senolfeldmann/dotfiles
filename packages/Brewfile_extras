@@ -2,7 +2,9 @@
 # convert/mogrify and mkvmerge/mkvextract sit directly in PATH for scripting;
 # a Flatpak would hide them behind `flatpak run --command=`.
 brew "imagemagick"
-brew "mkvtoolnix"
+# On macOS the mkvtoolnix-app cask below already symlinks the CLI tools
+# into PATH; installing the formula too makes `brew link` conflict.
+brew "mkvtoolnix" unless OS.mac?
 
 if OS.mac?
     # Runtimes
@@ -28,10 +30,11 @@ if OS.mac?
     cask "balenaetcher"
 
     # Multimedia tools
-    cask "handbrake"
+    cask "handbrake-app"
     cask "mediainfo"
-    # GUI app; the CLI tools come from the cross-platform formula above
-    cask "mkvtoolnix"
+    # GUI plus CLI: the cask symlinks mkvinfo/mkvmerge/mkvpropedit/mkvextract
+    # from the app bundle into PATH (formula therefore Linux-only above)
+    cask "mkvtoolnix-app"
     cask "mp3tag"
 
     # Downloader
