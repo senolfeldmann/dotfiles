@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # TCP-Pacing tuning for masterfedora.
 #
 # Background: this host sits behind two small unmanaged 10G switches in
@@ -28,11 +28,14 @@
 
 set -e
 
+SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
+source "$SCRIPT_DIR/../_guards.sh"
+
+require_linux
+
 # --- Host filter -------------------------------------------------------------
 # Only run on the PC. The laptop and other hosts get the distro default.
-if [[ "$(hostname)" != "masterfedora" ]]; then
-    exit 0
-fi
+[[ "$(hostname)" == "masterfedora" ]] || skip "host is not masterfedora"
 
 SYSCTL_FILE=/etc/sysctl.d/90-tcp-pacing.conf
 MODULES_FILE=/etc/modules-load.d/tcp-bbr.conf

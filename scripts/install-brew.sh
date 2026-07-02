@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Installs Homebrew packages from packages/Brewfile via `brew bundle`.
 # The Homebrew tool itself is installed separately by setup-homebrew.sh.
 #
@@ -18,24 +18,31 @@
 # accept the second password prompt.
 set -e
 
-if ! command -v brew >/dev/null 2>&1; then
-  echo "[install-brew] brew not installed, skipping."
-  exit 0
-fi
-
 SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
 REPO_DIR="$(dirname "$SCRIPT_DIR")"
-brewfile="$REPO_DIR/packages/Brewfile"
+source "$SCRIPT_DIR/_guards.sh"
 
-if command -v script >/dev/null 2>&1; then
-  if [[ "$OSTYPE" == "darwin"* ]]; then
-    # BSD script: command and args follow the typescript file.
-    script -q /dev/null brew bundle --file="$brewfile"
+require_command brew
+
+run_bundle() {
+  local brewfile="$1"
+  if command -v script >/dev/null 2>&1; then
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+      # BSD script: command and args follow the typescript file.
+      script -q /dev/null brew bundle --file="$brewfile"
+    else
+      # GNU/util-linux script: -c takes the command as a single shell string.
+      script -qc "brew bundle --file='$brewfile'" /dev/null
+    fi
   else
-    # GNU/util-linux script: -c takes the command as a single shell string.
-    script -qc "brew bundle --file='$brewfile'" /dev/null
+    echo "[install-brew] note: script(1) not available; brew will invalidate the parent sudo cache."
+    brew bundle --file="$brewfile"
   fi
-else
-  echo "[install-brew] note: script(1) not available; brew will invalidate the parent sudo cache."
-  brew bundle --file="$brewfile"
-fi
+}
+
+# Brewfile is the productivity baseline; Brewfile_extras holds the personal
+# extras (entertainment, media tooling) that a pure work machine would skip.
+# On such a machine, comment the second line out or run this script's steps
+# manually with just the first file.
+run_bundle "$REPO_DIR/packages/Brewfile"
+run_bundle "$REPO_DIR/packages/Brewfile_extras"

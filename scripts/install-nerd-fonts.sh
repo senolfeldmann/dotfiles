@@ -1,10 +1,12 @@
-#!/bin/bash
+#!/usr/bin/env bash
 set -euo pipefail
 
-if ! command -v fc-list >/dev/null 2>&1; then
-  echo "[install-nerd-fonts] fontconfig (fc-list) not available, skipping."
-  exit 0
-fi
+SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
+source "$SCRIPT_DIR/_guards.sh"
+
+require_ui
+# On macOS the Nerd Fonts come from Brew casks instead; no fontconfig there.
+require_command fc-list
 
 FONT_DIR="$HOME/.local/share/fonts"
 mkdir -p "$FONT_DIR"

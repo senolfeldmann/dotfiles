@@ -2,9 +2,10 @@
 build-essential
 coreutils
 htop
-# needed for tmux-yank to work under linux
-xsel
 zsh
+# clipboard access for tmux-yank: copying out of a terminal is wanted on
+# every machine, not just desktops, so this stays in the base list
+xsel
 
 #  libs
 ## for ruby

@@ -1,10 +1,17 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # KDE Plasma 6 settings (tested on Fedora Workstation 43, Plasma 6.6).
 # Only portable, machine-independent settings live here. Stateful things
 # like panel layout, monitor geometry and wallpaper paths are handled
 # outside this script (see README).
 
 set -e
+
+SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
+source "$SCRIPT_DIR/../_guards.sh"
+
+require_ui
+# Also covers macOS, headless Fedora and non-KDE desktops.
+require_command kwriteconfig6
 
 # --- Power management (AC profile) ---
 kwriteconfig6 --file powerdevilrc --group "AC" --group "Display" --key "DimDisplayIdleTimeoutSec" -- -1

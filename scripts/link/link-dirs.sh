@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Symlink whole directories from dir-links/<target>/<dirname> to
-# <TARGETS[target]>/<dirname>. For destinations dedicated to user-curated
+# $(target_dir <target>)/<dirname>. For destinations dedicated to user-curated
 # content where Claude Code or another tool may write new files into the
 # directory and we want them to land in the dotfiles repo automatically.
 # For individual files in mixed directories, see link-files.sh.
@@ -72,19 +72,22 @@ link_dir() {
 echo "The following directory mappings will be applied:"
 for repo_dir in "${REPO_DIRS[@]}"; do
   [[ -d "$repo_dir" ]] || continue
-  links_dir="$repo_dir/dir-links"
   echo "[$repo_dir]"
-  for dir in "${!TARGETS[@]}"; do
-    src_dir="$links_dir/$dir"
-    if [[ ! -d "$src_dir" ]]; then
-      echo "  $dir/ (directory not found, skipping)"
-      continue
-    fi
-    echo "  dir-links/$dir/ -> ${TARGETS[$dir]}"
-    while IFS= read -r -d '' subdir; do
-      rel="${subdir#"$src_dir"/}"
-      echo "    $rel/"
-    done < <(find "$src_dir" -mindepth 1 -maxdepth 1 -type d -print0 | sort -z)
+  set_link_source_trees "$repo_dir" dir-links
+  for links_dir in ${LINK_SOURCE_TREES[@]+"${LINK_SOURCE_TREES[@]}"}; do
+    tree_name="${links_dir#"$repo_dir"/}"
+    for dir in "${TARGET_NAMES[@]}"; do
+      src_dir="$links_dir/$dir"
+      if [[ ! -d "$src_dir" ]]; then
+        echo "  $tree_name/$dir/ (directory not found, skipping)"
+        continue
+      fi
+      echo "  $tree_name/$dir/ -> $(target_dir "$dir")"
+      while IFS= read -r -d '' subdir; do
+        rel="${subdir#"$src_dir"/}"
+        echo "    $rel/"
+      done < <(find "$src_dir" -mindepth 1 -maxdepth 1 -type d -print0 | sort -z)
+    done
   done
 done
 
@@ -127,16 +130,18 @@ fi
 # --- Link ---
 for repo_dir in "${REPO_DIRS[@]}"; do
   [[ -d "$repo_dir" ]] || continue
-  links_dir="$repo_dir/dir-links"
-  for dir in "${!TARGETS[@]}"; do
-    src_dir="$links_dir/$dir"
-    dest="${TARGETS[$dir]}"
-    [[ -d "$src_dir" ]] || continue
+  set_link_source_trees "$repo_dir" dir-links
+  for links_dir in ${LINK_SOURCE_TREES[@]+"${LINK_SOURCE_TREES[@]}"}; do
+    for dir in "${TARGET_NAMES[@]}"; do
+      src_dir="$links_dir/$dir"
+      dest="$(target_dir "$dir")"
+      [[ -d "$src_dir" ]] || continue
 
-    while IFS= read -r -d '' subdir; do
-      rel="${subdir#"$src_dir"/}"
-      link_dir "$subdir" "$dest/$rel"
-    done < <(find "$src_dir" -mindepth 1 -maxdepth 1 -type d -print0)
+      while IFS= read -r -d '' subdir; do
+        rel="${subdir#"$src_dir"/}"
+        link_dir "$subdir" "$dest/$rel"
+      done < <(find "$src_dir" -mindepth 1 -maxdepth 1 -type d -print0)
+    done
   done
 done
 

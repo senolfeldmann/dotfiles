@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Installs the Homebrew tool itself. Package installation via `brew bundle`
 # is handled separately by install-brew.sh.
 # Source: https://brew.sh/

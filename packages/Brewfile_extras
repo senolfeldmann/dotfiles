@@ -1,3 +1,9 @@
+# Cross-platform (macOS and Linuxbrew): CLI media tools as formulae so
+# convert/mogrify and mkvmerge/mkvextract sit directly in PATH for scripting;
+# a Flatpak would hide them behind `flatpak run --command=`.
+brew "imagemagick"
+brew "mkvtoolnix"
+
 if OS.mac?
     # Runtimes
     cask "crossover"
@@ -13,7 +19,7 @@ if OS.mac?
     mas "ApolloOne", id: 1044484672
 
     # Engineering
-    cask "ultimaker-cura"
+    cask "bambu-studio"
 
     # Misc Tools
     cask "balenaetcher"
@@ -21,8 +27,8 @@ if OS.mac?
 
     # Multimedia tools
     cask "handbrake"
-    brew "imagemagick"
     cask "mediainfo"
+    # GUI app; the CLI tools come from the cross-platform formula above
     cask "mkvtoolnix"
 
     # Downloader
@@ -30,7 +36,6 @@ if OS.mac?
 
     # Communication
     cask "discord"
-    cask "thunderbird"
 
     # System
     cask "appcleaner"

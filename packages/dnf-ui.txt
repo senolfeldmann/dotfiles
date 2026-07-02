@@ -1,0 +1,34 @@
+# Desktop-only packages. install-dnf.sh skips this file when apply.sh runs
+# with --no-ui (DOTFILES_NO_UI=1), so terminal-only machines (servers, VMs)
+# stay lean while the Fedora desktop keeps everything.
+
+# desktop base
+# Preinstalled on Workstation/KDE spins; listed explicitly so apply.sh
+# works on a barebones Fedora desktop install too:
+#   flatpak    -> install-flatpak.sh, tweaks/flatpak.sh
+#   fontconfig -> install-nerd-fonts.sh (fc-list / fc-cache)
+flatpak
+fontconfig
+
+# handy (voice-to-text) and the input injection it needs
+https://github.com/cjpais/Handy/releases/download/v0.8.2/Handy-0.8.2-1.x86_64.rpm
+gtk-layer-shell
+ydotool
+
+# apps
+code
+gparted
+google-chrome-stable
+kate
+keepassxc
+kitty
+nextcloud-client
+remmina
+thunderbird
+
+# windows compatibility (CrossOver ships only as a vendor RPM; the demo RPM
+# is the official install path, licensing happens in-app)
+https://media-zh.codeweavers.com/pub/crossover/cxlinux/demo/crossover-26.2.0-1.rpm
+
+# gaming
+steam

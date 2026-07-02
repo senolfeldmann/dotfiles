@@ -1,0 +1,8 @@
+# Desktop-only packages for Debian/Ubuntu. install-apt.sh skips this file
+# when DOTFILES_NO_UI=1 (apply.sh --no-ui).
+#
+# Currently empty: the Debian/Ubuntu targets are servers and WSL, and
+# everything considered so far turned out to be wanted on terminal-only
+# machines too (e.g. xsel for tmux clipboard). Kept so install-apt.sh
+# mirrors install-dnf.sh exactly and desktop-only apt packages have an
+# obvious home.

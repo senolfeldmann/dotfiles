@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Symlink individual files from file-links/<target>/<rel> to
-# <TARGETS[target]>/<rel>. For files that share a destination directory
+# $(target_dir <target>)/<rel>. For files that share a destination directory
 # with other unmanaged files (e.g. ~/.zshrc next to OS-managed dotfiles).
 # For whole-directory takeovers, see link-dirs.sh.
 set -euo pipefail
@@ -67,19 +67,22 @@ link_file() {
 echo "The following file mappings will be applied:"
 for repo_dir in "${REPO_DIRS[@]}"; do
   [[ -d "$repo_dir" ]] || continue
-  links_dir="$repo_dir/file-links"
   echo "[$repo_dir]"
-  for dir in "${!TARGETS[@]}"; do
-    src_dir="$links_dir/$dir"
-    if [[ ! -d "$src_dir" ]]; then
-      echo "  $dir/ (directory not found, skipping)"
-      continue
-    fi
-    echo "  file-links/$dir/ -> ${TARGETS[$dir]}"
-    while IFS= read -r -d '' file; do
-      rel="${file#"$src_dir"/}"
-      echo "    $rel"
-    done < <(find "$src_dir" -type f -print0 | sort -z)
+  set_link_source_trees "$repo_dir" file-links
+  for links_dir in ${LINK_SOURCE_TREES[@]+"${LINK_SOURCE_TREES[@]}"}; do
+    tree_name="${links_dir#"$repo_dir"/}"
+    for dir in "${TARGET_NAMES[@]}"; do
+      src_dir="$links_dir/$dir"
+      if [[ ! -d "$src_dir" ]]; then
+        echo "  $tree_name/$dir/ (directory not found, skipping)"
+        continue
+      fi
+      echo "  $tree_name/$dir/ -> $(target_dir "$dir")"
+      while IFS= read -r -d '' file; do
+        rel="${file#"$src_dir"/}"
+        echo "    $rel"
+      done < <(find "$src_dir" -type f -print0 | sort -z)
+    done
   done
 done
 
@@ -122,16 +125,18 @@ fi
 # --- Link ---
 for repo_dir in "${REPO_DIRS[@]}"; do
   [[ -d "$repo_dir" ]] || continue
-  links_dir="$repo_dir/file-links"
-  for dir in "${!TARGETS[@]}"; do
-    src_dir="$links_dir/$dir"
-    dest="${TARGETS[$dir]}"
-    [[ -d "$src_dir" ]] || continue
+  set_link_source_trees "$repo_dir" file-links
+  for links_dir in ${LINK_SOURCE_TREES[@]+"${LINK_SOURCE_TREES[@]}"}; do
+    for dir in "${TARGET_NAMES[@]}"; do
+      src_dir="$links_dir/$dir"
+      dest="$(target_dir "$dir")"
+      [[ -d "$src_dir" ]] || continue
 
-    while IFS= read -r -d '' file; do
-      rel="${file#"$src_dir"/}"
-      link_file "$file" "$dest/$rel"
-    done < <(find "$src_dir" -type f -print0)
+      while IFS= read -r -d '' file; do
+        rel="${file#"$src_dir"/}"
+        link_file "$file" "$dest/$rel"
+      done < <(find "$src_dir" -type f -print0)
+    done
   done
 done
 

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Sets up Fedora-specific dnf repos (Chrome, VS Code, RPM Fusion) so that
 # subsequent install-dnf.sh runs can pull packages from them. All operations are
 # intrinsically idempotent: dnf config-manager and rpm --import succeed
@@ -6,10 +6,10 @@
 # content, and the RPM Fusion release packages are guarded with rpm -q.
 set -e
 
-if ! command -v dnf >/dev/null 2>&1; then
-  echo "[setup-fedora-repos] dnf not available, skipping."
-  exit 0
-fi
+SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
+source "$SCRIPT_DIR/_guards.sh"
+
+require_command dnf
 
 # Enable google chrome repo
 echo "Enabling google chrome repo"
@@ -39,4 +39,24 @@ fi
 # config-manager setopt is intrinsically idempotent.
 echo "Enabling fedora-cisco-openh264 repo"
 sudo dnf config-manager setopt fedora-cisco-openh264.enabled=1
+
+# Docker CE repo (docker-ce and friends in packages/dnf.txt come from here).
+# `addrepo` refuses to overwrite an existing repo file, so guard on presence.
+if [[ -f /etc/yum.repos.d/docker-ce.repo ]]; then
+  echo "Docker CE repo already present"
+else
+  echo "Setting up Docker CE repo"
+  sudo dnf config-manager addrepo --from-repofile=https://download.docker.com/linux/fedora/docker-ce.repo
+fi
+
+# Ookla repo for the official Speedtest CLI (`speedtest` in packages/dnf.txt).
+# Ookla only documents their packagecloud script as the install path; it
+# writes the .repo file we guard on. On macOS the same tool comes from the
+# teamookla/speedtest brew tap instead.
+if [[ -f /etc/yum.repos.d/ookla_speedtest-cli.repo ]]; then
+  echo "Ookla speedtest repo already present"
+else
+  echo "Setting up Ookla speedtest repo"
+  curl -fsSL https://packagecloud.io/install/repositories/ookla/speedtest-cli/script.rpm.sh | sudo bash
+fi
 

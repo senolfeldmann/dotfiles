@@ -1,14 +1,22 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+# Load the session environment (PATH, brew shellenv, ...) from .zprofile if
+# this session has not done so yet.
+#
+# Why the guard exists: zsh reads .zprofile natively only for LOGIN shells,
+# and .zshrc only for INTERACTIVE shells - two independent axes. macOS
+# terminals open every tab as a login shell, so there .zprofile has already
+# run by the time we get here; sourcing it again would prepend every PATH
+# entry a second time. Linux terminals usually spawn non-login interactive
+# shells, which never read .zprofile natively - without this line they
+# would have no brew, no ~/.local/bin, etc. The flag is exported in
+# .zprofile, so subshells inherit it and skip the source too: the profile
+# runs exactly once per session on both OSes.
+[[ -z "$__DOTFILES_PROFILE_LOADED" ]] && source "$HOME/.zprofile"
+
 # Path to your oh-my-zsh installation.
 export ZSH="${HOME}/.oh-my-zsh"
-
-export PATH="$HOME/.local/bin:$PATH"
-
-if [[ "$OSTYPE" == "linux"* ]]; then
-  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)"
-fi
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -166,6 +174,3 @@ export SAVEHIST=$HISTSIZE
 setopt EXTENDED_HISTORY
 
 eval "$($(brew --prefix)/bin/mise activate zsh)"
-
-# opencode
-export PATH=/home/senol/.opencode/bin:$PATH

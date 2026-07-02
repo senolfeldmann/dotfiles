@@ -3,19 +3,16 @@
 @development-tools
 git
 htop
-# needed for tmux-yank to work under linux
-xsel
 zsh
+# clipboard access for tmux-yank: copying out of a terminal is wanted on
+# every machine, not just desktops, so this stays in the base list
+xsel
 # script(1), used by install-brew.sh to wrap brew in a pseudo-TTY so
 # brew's internal `sudo -k` does not kill the parent sudo cache
 util-linux-script
-# Preinstalled on Workstation/KDE spins; listed explicitly so apply.sh
-# works on a barebones Fedora install too:
-#   flatpak    -> install-flatpak.sh, tweaks/flatpak.sh
-#   fontconfig -> install-nerd-fonts.sh (fc-list / fc-cache)
-#   unzip      -> install-nerd-fonts.sh (extract Nerd Font archives)
-flatpak
-fontconfig
+# unzip is needed by install-nerd-fonts.sh but generally useful enough to
+# stay in the base list. Preinstalled on Workstation/KDE spins; listed
+# explicitly so apply.sh works on a barebones Fedora install too.
 unzip
 
 # libs and building
@@ -42,9 +39,18 @@ expat
 expat-devel
 mpdecimal
 python3-pip
-rustc
 iperf3
-kate
+# Ookla Speedtest CLI; repo comes from setup-fedora-repos.sh
+speedtest
+
+# containers
+# Repo comes from setup-fedora-repos.sh (docker-ce.repo); group membership
+# and daemon activation from tweaks/docker.sh.
+docker-ce
+docker-ce-cli
+containerd.io
+docker-buildx-plugin
+docker-compose-plugin
 
 # ai
 glslang
@@ -55,23 +61,5 @@ vulkan-loader-devel
 spirv-headers-devel
 spirv-tools-devel
 
-# handy
-https://github.com/cjpais/Handy/releases/download/v0.8.2/Handy-0.8.2-1.x86_64.rpm
-gtk-layer-shell
-ydotool
-
 # mount.cifs for the SMB shares set up in tweaks/cifs-mounts.sh
 cifs-utils
-
-# ui
-code
-gparted
-google-chrome-stable
-keepassxc
-kitty
-nextcloud-client
-remmina
-thunderbird
-
-# gaming
-steam

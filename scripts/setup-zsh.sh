@@ -1,14 +1,14 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Installs oh-my-zsh and the gruvbox theme. Idempotent: re-running skips both
 # steps if already installed. Designed to leave the existing .zshrc symlink
 # untouched (KEEP_ZSHRC=yes); the installer is run --unattended so it does
 # not chsh or start zsh at the end.
 set -e
 
-if ! command -v zsh >/dev/null 2>&1; then
-  echo "[setup-zsh] zsh not installed, skipping. Install zsh first (e.g. via install-dnf.sh)."
-  exit 0
-fi
+SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
+source "$SCRIPT_DIR/_guards.sh"
+
+require_command zsh
 
 # Install oh-my-zsh if not already present
 # Source: https://github.com/ohmyzsh/ohmyzsh

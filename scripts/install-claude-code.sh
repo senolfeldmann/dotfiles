@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Installs Claude Code via the upstream installer script.
 # Idempotent via `command -v claude` guard.
 set -e

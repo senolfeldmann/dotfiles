@@ -7,3 +7,10 @@ com.bambulab.BambuStudio
 com.rtosta.zapzap
 com.anydesk.Anydesk
 net.mediaarea.MediaInfo
+io.dbeaver.DBeaverCommunity
+com.getpostman.Postman
+com.redis.RedisInsight
+org.videolan.VLC
+fr.handbrake.ghb
+com.discordapp.Discord
+org.inkscape.Inkscape

@@ -1,17 +1,37 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Shared helpers for link-files.sh and link-dirs.sh. Sourced, not invoked.
-# Assumes the caller has already sourced _targets.sh (TARGETS must exist)
-# and runs under `set -euo pipefail`.
+# Assumes the caller has already sourced _targets.sh (TARGET_NAMES and
+# target_dir must exist) and runs under `set -euo pipefail`.
 
-# Sanity check: every TARGETS value must be an absolute path. Catches typos
+# set_link_source_trees <repo_dir> <kind>: fill the global LINK_SOURCE_TREES
+# array with the source trees to walk for this repo and kind ("file-links"
+# or "dir-links"): the common tree plus the OS-scoped sibling matching the
+# current OS (<kind>.linux on Linux, <kind>.darwin on macOS). Content in an
+# OS-scoped tree is linked only on that OS, so OS-specific configs never end
+# up as meaningless symlinks on the other one. Non-existent trees are simply
+# omitted. A global array instead of stdout because bash 3.2 (macOS) has no
+# mapfile to read a list back conveniently.
+set_link_source_trees() {
+  local repo_dir="$1" kind="$2" suffix=""
+  LINK_SOURCE_TREES=()
+  case "$(uname -s)" in
+    Linux)  suffix="linux" ;;
+    Darwin) suffix="darwin" ;;
+  esac
+  [[ -d "$repo_dir/$kind" ]] && LINK_SOURCE_TREES+=("$repo_dir/$kind")
+  [[ -n "$suffix" && -d "$repo_dir/$kind.$suffix" ]] && LINK_SOURCE_TREES+=("$repo_dir/$kind.$suffix")
+  return 0
+}
+
+# Sanity check: every target must resolve to an absolute path. Catches typos
 # in _targets.sh before they cause silent damage downstream (relative paths
 # would resolve against $PWD when the script runs, producing surprises).
 check_targets_sanity() {
   local target val
-  for target in "${!TARGETS[@]}"; do
-    val="${TARGETS[$target]}"
+  for target in "${TARGET_NAMES[@]}"; do
+    val="$(target_dir "$target")"
     if [[ "$val" != /* ]]; then
-      echo "Invalid TARGETS entry: [$target]=\"$val\" (must be an absolute path)" >&2
+      echo "Invalid target: $target -> \"$val\" (must be an absolute path)" >&2
       exit 1
     fi
   done
@@ -25,51 +45,58 @@ check_targets_sanity() {
 #   2. A directory entry's destination is an ANCESTOR of another entry's
 #      destination (would create a symlink loop or a destructive overlap).
 #
-# Comparison is purely lexical: we trust $HOME and TARGETS values to be
-# canonical, and do not call realpath. If $HOME or any TARGETS value passes
-# through symlinks itself, we may miss a conflict or report a false positive.
-# Documented limitation; not worth realpath complexity for this repo.
+# Comparison is purely lexical: we trust $HOME and the target directories to
+# be canonical, and do not call realpath. If $HOME or any target directory
+# passes through symlinks itself, we may miss a conflict or report a false
+# positive. Documented limitation; not worth realpath complexity for this repo.
 #
 # Usage: precheck_no_conflicts <repo_dir>
 # On conflict: prints all conflicts to stderr and exits 1 (no changes made).
 precheck_no_conflicts() {
   local repo_dir="$1"
-  local file_links_dir="$repo_dir/file-links"
-  local dir_links_dir="$repo_dir/dir-links"
 
   # Parallel arrays: type ("f" or "d"), source path, absolute destination
   local -a types=()
   local -a sources=()
   local -a dests=()
 
-  local target src_dir entry rel dest
+  local tree target src_dir entry rel dest
 
-  # Collect every file under file-links/<target>/...
-  for target in "${!TARGETS[@]}"; do
-    src_dir="$file_links_dir/$target"
-    [[ -d "$src_dir" ]] || continue
-    while IFS= read -r -d '' entry; do
-      rel="${entry#"$src_dir"/}"
-      dest="${TARGETS[$target]}/$rel"
-      types+=("f")
-      sources+=("$entry")
-      dests+=("$dest")
-    done < <(find "$src_dir" -type f -print0)
+  # Collect every file under each active file-links tree's <target>/...
+  # Only the trees active on this OS are checked: the same destination in
+  # file-links.linux/ and file-links.darwin/ is a per-OS variant of one
+  # config, not a conflict.
+  set_link_source_trees "$repo_dir" file-links
+  for tree in ${LINK_SOURCE_TREES[@]+"${LINK_SOURCE_TREES[@]}"}; do
+    for target in "${TARGET_NAMES[@]}"; do
+      src_dir="$tree/$target"
+      [[ -d "$src_dir" ]] || continue
+      while IFS= read -r -d '' entry; do
+        rel="${entry#"$src_dir"/}"
+        dest="$(target_dir "$target")/$rel"
+        types+=("f")
+        sources+=("$entry")
+        dests+=("$dest")
+      done < <(find "$src_dir" -type f -print0)
+    done
   done
 
-  # Collect every top-level directory under dir-links/<target>/.
-  # Only first-level directories are linkable units; nested content lives
-  # inside the linked directory.
-  for target in "${!TARGETS[@]}"; do
-    src_dir="$dir_links_dir/$target"
-    [[ -d "$src_dir" ]] || continue
-    while IFS= read -r -d '' entry; do
-      rel="${entry#"$src_dir"/}"
-      dest="${TARGETS[$target]}/$rel"
-      types+=("d")
-      sources+=("$entry")
-      dests+=("$dest")
-    done < <(find "$src_dir" -mindepth 1 -maxdepth 1 -type d -print0)
+  # Collect every top-level directory under each active dir-links tree's
+  # <target>/. Only first-level directories are linkable units; nested
+  # content lives inside the linked directory.
+  set_link_source_trees "$repo_dir" dir-links
+  for tree in ${LINK_SOURCE_TREES[@]+"${LINK_SOURCE_TREES[@]}"}; do
+    for target in "${TARGET_NAMES[@]}"; do
+      src_dir="$tree/$target"
+      [[ -d "$src_dir" ]] || continue
+      while IFS= read -r -d '' entry; do
+        rel="${entry#"$src_dir"/}"
+        dest="$(target_dir "$target")/$rel"
+        types+=("d")
+        sources+=("$entry")
+        dests+=("$dest")
+      done < <(find "$src_dir" -mindepth 1 -maxdepth 1 -type d -print0)
+    done
   done
 
   # Pairwise compare. O(n^2) but n is small.

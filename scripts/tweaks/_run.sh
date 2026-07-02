@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Runs every non-underscore script in this directory.
 # Add a new tweak = drop a new `*.sh` file here.
 set -e

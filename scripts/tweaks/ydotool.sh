@@ -1,6 +1,14 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Run ydotoold as a user service (needed by Handy voice→text) and disable the broken upstream service.
 set -e
+
+SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
+source "$SCRIPT_DIR/../_guards.sh"
+
+require_ui
+# udev + systemd user units; and on macOS Handy injects input itself.
+require_linux
+require_command ydotoold
 
 # --- Disable the system service so it can't hold the socket ---
 # May not be installed or already disabled; ignore either case.

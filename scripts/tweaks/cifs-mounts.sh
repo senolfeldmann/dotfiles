@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Mount CIFS/SMB shares from a personal NAS via fstab.
 #
 # Host, shares, and a profile name are personal/machine-specific and live
@@ -40,6 +40,14 @@
 #     ever lost.
 
 set -e
+
+SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
+source "$SCRIPT_DIR/../_guards.sh"
+
+# fstab + systemd are Linux machinery; macOS mounts SMB natively (Finder /
+# mount_smbfs). The guard matters because the private repo links cifs.conf
+# on every machine, so the config-existence check below does NOT stop a Mac.
+require_linux
 
 # --- Personal config (name/host/shares), kept out of this public repo ---
 CIFS_CONF="${XDG_CONFIG_HOME:-$HOME/.config}/dotfiles/cifs.conf"

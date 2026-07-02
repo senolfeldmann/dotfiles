@@ -5,7 +5,6 @@
 brew "fastfetch"
 cask "font-fira-code-nerd-font" if OS.mac?
 cask "font-fira-mono-nerd-font" if OS.mac?
-brew "gcc"
 brew "git" if OS.mac?
 brew "htop" if OS.mac?
 cask "iterm2" if OS.mac?
@@ -35,13 +34,18 @@ brew "kubectl"
 brew "k9s"
 
 # Misc cli tools
-brew "speedtest-cli"
+# Ookla's official Speedtest CLI. The tap ships a macOS-only binary;
+# on Fedora it comes from Ookla's dnf repo (see setup-fedora-repos.sh).
+tap "teamookla/speedtest" if OS.mac?
+brew "speedtest" if OS.mac?
 brew "yt-dlp"
 
 # AI
-cask "claude-code" if OS.mac?
 brew "hf"
-brew "ollama"
+# Native menubar app with autostart and auto-update; conflicts with the
+# CLI-only `ollama` formula, pick one. On Linux, Ollama comes from the
+# official installer (systemd service, GPU setup): scripts/install-ollama.sh
+cask "ollama-app" if OS.mac?
 
 # GPG
 if OS.mac?
@@ -53,13 +57,12 @@ if OS.mac?
 end
 
 if OS.mac?
-  # Docker
-  brew "docker"
-  # buildx has to be manually linked into docker cli plugins
-  # mkdir -p ~/.docker/cli-plugins
-  # ln -s $(which docker-buildx) ~/.docker/cli-plugins/docker-buildx
-  brew "docker-buildx"
-  brew "docker-compose"
+  # Docker: Rancher Desktop provides the VM/daemon AND its own matching
+  # CLIs (docker, buildx, compose, kubectl, nerdctl, helm) in ~/.rd/bin;
+  # separate brew formulae would just drift against the daemon version.
+  # ~/.rd/bin is added to PATH in .zshrc. One-time app setting: set
+  # Preferences -> Application -> Environment -> Path Management to
+  # "Manual", so the app never edits the symlinked rc files itself.
   cask "rancher"
 
   # Dev tools
@@ -93,6 +96,7 @@ if OS.mac?
   cask "google-chrome"
 
   # Misc
+  cask "anydesk"
   cask "gifox"
   cask "windows-app"
   cask "teamviewer"
@@ -119,7 +123,6 @@ if OS.mac?
   # Multimedia
   mas "Soundwaves", id: 1482688534
   cask "spotify"
-  cask "vlc"
 
   # Communication
   mas "WhatsApp", id: 310633997

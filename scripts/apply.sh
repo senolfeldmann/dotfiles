@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Sync the current machine to repo state. Safe to re-run any time.
 #
 # Each step is a self-contained, idempotent script: guards (command -v X,
@@ -9,9 +9,16 @@
 # On a fresh machine, the manual prerequisites (SSH keys, GPG keys, git
 # clone of this repo, chsh -s zsh) must be done first; see README.
 #
-# Usage: apply.sh [--debug]
+# Usage: apply.sh [--debug] [--no-ui]
 #   --debug   Annotate each section header with the current sudo cache state.
 #             Useful for diagnosing unexpected password prompts during a run.
+#   --no-ui   Terminal-only mode for machines without a desktop (servers,
+#             minimal VMs, WSL): skips the desktop package lists
+#             (packages/dnf-ui.txt, packages/apt-ui.txt), Flatpaks, Nerd
+#             Fonts and the desktop tweaks. Sets the environment variable
+#             DOTFILES_NO_UI=1, which every child script inherits; the
+#             guards live inside the affected scripts, so a standalone run
+#             works the same: DOTFILES_NO_UI=1 ./scripts/install-dnf.sh
 set -e
 
 DEBUG=0
@@ -19,6 +26,10 @@ while [[ $# -gt 0 ]]; do
   case "$1" in
     -d|--debug)
       DEBUG=1
+      shift
+      ;;
+    --no-ui)
+      export DOTFILES_NO_UI=1
       shift
       ;;
     -h|--help)
@@ -99,6 +110,9 @@ section "Fonts"
 
 section "Claude Code"
 "$SCRIPT_DIR/install-claude-code.sh"
+
+section "Ollama"
+"$SCRIPT_DIR/install-ollama.sh"
 
 section "Oh My Zsh"
 "$SCRIPT_DIR/setup-zsh.sh"

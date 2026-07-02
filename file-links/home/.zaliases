@@ -66,7 +66,9 @@ update-all() {
 
   if [[ "$OSTYPE" == "darwin"* ]]; then
     print -P "%F{cyan}%B::: macOS%b%f"
-    __ua_step "Homebrew (formulae)"       "brew update && brew upgrade --yes"
+    # --formula keeps step 1 to formulae only: a bare `brew upgrade` would
+    # also upgrade non-greedy casks and blur the two steps into each other.
+    __ua_step "Homebrew (formulae)"       "brew update && brew upgrade --formula --yes"
     __ua_step "Homebrew (casks --greedy)" "brew upgrade --cask --greedy --yes"
     if command -v mas >/dev/null 2>&1; then
       __ua_step "Mac App Store (mas)" "mas upgrade"
