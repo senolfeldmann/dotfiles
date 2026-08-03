@@ -19,7 +19,7 @@
 # Values must be absolute paths; the precheck rejects relative paths with a
 # clear error.
 
-TARGET_NAMES=(home config claude)
+TARGET_NAMES=(home config claude codex agents)
 
 target_dir() {
   case "$1" in
@@ -27,6 +27,11 @@ target_dir() {
     config) echo "$HOME/.config" ;;
     # Claude Code config; sources may live in a private repo (see EXTRA_REPO_DIRS)
     claude) echo "$HOME/.claude" ;;
+    # Codex CLI config (config.toml, global AGENTS.md); sources in the private repo
+    codex)  echo "$HOME/.codex" ;;
+    # Agent-Skills-standard shared location (~/.agents/skills), read by Codex
+    # and other AGENTS.md-standard harnesses; sources in the private repo
+    agents) echo "$HOME/.agents" ;;
     *)
       echo "target_dir: unknown target '$1'" >&2
       return 1
