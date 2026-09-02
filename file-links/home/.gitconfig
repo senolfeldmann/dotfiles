@@ -1,0 +1,8 @@
+[user]
+	signingkey = 0E459AFB7EE64150
+	name = Şenol Feldmann
+	email = senol.feldmann@gmail.com
+[commit]
+	gpgsign = true
+[tag]
+	gpgSign = true
