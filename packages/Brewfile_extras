@@ -53,7 +53,6 @@ if OS.mac?
     # System
     cask "appcleaner"
     cask "cinebench"
-    cask "lulu"
     # both ship a kext: one-time Reduced Security + kext approval in
     # RecoveryOS required; license activation stays manual
     cask "paragon-ntfs"
