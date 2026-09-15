@@ -44,7 +44,7 @@ run_bundle() {
 # is trusted (HOMEBREW_REQUIRE_TAP_TRUST defaults to on). Trust the taps the
 # Brewfiles use before bundling; idempotent, stored in ~/.homebrew/trust.json.
 if [[ "$OSTYPE" == "darwin"* ]]; then
-  brew trust --tap teamookla/speedtest jorgelbg/tap
+  brew trust --tap teamookla/speedtest jorgelbg/tap playcover/playcover
 fi
 
 # Brewfile is the productivity baseline; Brewfile_extras holds the personal

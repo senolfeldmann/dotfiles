@@ -15,7 +15,8 @@ if OS.mac?
     # Entertainment
     # client is native since mid-2025; x86 games still run under rosetta
     cask "steam"
-    cask "playcover-community"
+    tap "playcover/playcover"
+    cask "playcover/playcover/playcover-nightly"
 
     # Multimedia
     cask "plex"
@@ -31,11 +32,13 @@ if OS.mac?
 
     # Multimedia tools
     cask "handbrake-app"
+    cask "calibre"
     cask "mediainfo"
     # GUI plus CLI: the cask symlinks mkvinfo/mkvmerge/mkvpropedit/mkvextract
     # from the app bundle into PATH (formula therefore Linux-only above)
     cask "mkvtoolnix-app"
     cask "mp3tag"
+    cask "obs"
 
     # Downloader
     cask "jdownloader"
@@ -45,6 +48,7 @@ if OS.mac?
 
     # System
     cask "appcleaner"
+    cask "cinebench"
     cask "lulu"
     # both ship a kext: one-time Reduced Security + kext approval in
     # RecoveryOS required; license activation stays manual
@@ -56,9 +60,6 @@ if OS.mac?
     # Not available via brew
     # filezilla
     # nsusbloader
-
-    # Installed manually
-    # Perfect privacy (take the ARM pkg, not the Intel one)
 
     # Installed manually via Crossover
     # Batch Renamer Utility

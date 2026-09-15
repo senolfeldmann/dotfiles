@@ -32,6 +32,7 @@ brew "kubectl"
 brew "k9s"
 
 # Misc cli tools
+brew "memtester"
 # Ookla's official Speedtest CLI. The tap ships a macOS-only binary;
 # on Fedora it comes from Ookla's dnf repo (see setup-fedora-repos.sh).
 tap "teamookla/speedtest" if OS.mac?
@@ -40,6 +41,10 @@ brew "yt-dlp"
 
 # AI
 brew "hf"
+cask "chatgpt" if OS.mac?
+cask "codex" if OS.mac?
+cask "handy" if OS.mac?
+cask "lm-studio" if OS.mac?
 # Native menubar app with autostart and auto-update; conflicts with the
 # CLI-only `ollama` formula, pick one. On Linux, Ollama comes from the
 # official installer (systemd service, GPU setup): scripts/install-ollama.sh
@@ -76,9 +81,10 @@ if OS.mac?
   # System tools
   cask "betterdisplay"
   cask "coconutbattery"
-  cask "monitorcontrol"
-  cask "hiddenbar"
+  # Waiting for stable Thaw to support macOS 27.
+  # cask "thaw"
   mas "Amphetamine", id: 937984704
+  mas "Blackmagic Disk Speed Test", id: 425264550
   cask "alt-tab"
 
   # Peripherals
@@ -101,6 +107,8 @@ if OS.mac?
 
   # Security
   cask "keepassxc"
+  cask "nordvpn"
+  mas "Strongbox Pro", id: 1481853033
 
   # Productivity
   cask "alfred"
@@ -109,6 +117,7 @@ if OS.mac?
   mas "Magnet", id: 441258766
 
   # Art
+  cask "blender"
   cask "paintbrush"
   cask "inkscape"
 
@@ -121,11 +130,14 @@ if OS.mac?
   # mas "WolframAlpha classic", id: 334989259
 
   # Multimedia
+  # Manually installed:
+  # DisplayCAL (Python 3 fork): https://github.com/eoyilmaz/displaycal-py3/releases
   mas "Soundwaves", id: 1482688534
   cask "spotify"
 
   # Communication
   cask "microsoft-teams"
+  cask "telegram"
   mas "WhatsApp", id: 310633997
 
   # Cloud
