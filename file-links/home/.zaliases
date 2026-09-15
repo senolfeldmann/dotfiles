@@ -156,10 +156,75 @@ brew-auto-updates() {
   fi
 }
 
-# agent: open a Claude Code session in one of the agent personas living
-# under ~/agents/<name>/. Convention: each agent is a sibling directory in
-# the agents repo with its own persona.md and Claude config. The cd runs
-# inside a subshell so the parent shell's cwd is preserved on return.
+# _agent_select_harness: choose the harness for one agent session. Codex is
+# selected by default; the choice is deliberately per invocation rather than
+# persisted as hidden global state.
+_agent_select_harness() {
+  emulate -L zsh
+  setopt localoptions localtraps
+
+  local -a labels=("Codex (default)" "Claude Code")
+  local -a commands=(codex claude)
+  local selected=1
+  local key suffix arrow
+  local chosen=""
+  local i
+
+  # Use the terminal's alternate screen so redraws do not pollute scrollback.
+  print -rn -- $'\e[?1049h\e[?25l'
+  {
+    while [[ -z "$chosen" ]]; do
+      print -rn -- $'\e[2J\e[H'
+      print -r -- "Agent $1: select harness"
+      print
+      for (( i = 1; i <= ${#labels}; i++ )); do
+        if (( i == selected )); then
+          print -P "%S > $i. ${labels[$i]} %s"
+        else
+          print -r -- "   $i. ${labels[$i]}"
+        fi
+      done
+      print
+      print -r -- "Up/Down or 1/2: select   Enter: start   Esc: exit"
+
+      if ! read -rsk 1 key; then
+        chosen="cancel"
+        break
+      fi
+
+      case "$key" in
+        1|2)
+          selected="$key"
+          ;;
+        $'\n'|$'\r'|"")
+          chosen="${commands[$selected]}"
+          ;;
+        $'\e')
+          suffix=""
+          arrow=""
+          if read -rsk 1 -t 0.05 suffix && [[ "$suffix" == "[" ]] &&
+              read -rsk 1 -t 0.05 arrow; then
+            case "$arrow" in
+              A) (( selected = selected == 1 ? ${#labels} : selected - 1 )) ;;
+              B) (( selected = selected == ${#labels} ? 1 : selected + 1 )) ;;
+            esac
+          else
+            chosen="cancel"
+          fi
+          ;;
+      esac
+    done
+  } always {
+    print -rn -- $'\e[?25h\e[?1049l'
+  }
+
+  [[ "$chosen" == "cancel" ]] && return 1
+  REPLY="$chosen"
+}
+
+# agent: open one of the personas under ~/agents/<name>/ with the selected
+# harness. Codex reads the compiled AGENTS.md; Claude Code reads CLAUDE.md.
+# The cd runs in a subshell so the parent shell's cwd is preserved on return.
 agent() {
   local AGENTS_DIR="$HOME/agents"
   local name="$1"
@@ -172,7 +237,16 @@ agent() {
     print -u2 "no such agent: $name (looked in $dir)"
     return 1
   fi
-  ( cd "$dir" && claude )
+
+  local harness
+  _agent_select_harness "$name" || return 0
+  harness="$REPLY"
+  if ! command -v "$harness" >/dev/null 2>&1; then
+    print -u2 "agent: selected harness is not installed: $harness"
+    return 1
+  fi
+
+  ( cd "$dir" && "$harness" )
 }
 
 # _agent: zsh completion helper for `agent`. Schema-based filter rather

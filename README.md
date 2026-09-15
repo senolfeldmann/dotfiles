@@ -161,7 +161,7 @@ macOS system updates are deliberately **not** covered. `softwareupdate --install
 
 This is distinct from `apply.sh`: `update-all` upgrades versions of installed software, while `apply.sh` syncs the machine to the repo's package lists, symlinks, and tweaks. Both are safe to run any time; typical sequence after a `git pull` is `./scripts/apply.sh && update-all` (or run them separately depending on intent).
 
-`update-all` is the largest of a small set of shell helpers that live in [`file-links/home/.zaliases`](file-links/home/.zaliases) (currently also `brew-auto-updates` for inspecting self-updating casks and `agent`, which opens a Claude Code session in one of the personas under `~/agents/<name>/`). Each helper is inline-commented with what it does, why it exists, and any non-obvious design choices; if the set grows materially they'll be split out into their own file.
+`update-all` is the largest of a small set of shell helpers that live in [`file-links/home/.zaliases`](file-links/home/.zaliases) (currently also `brew-auto-updates` for inspecting self-updating casks and `agent`, which opens a named persona with a per-session choice between Codex and Claude Code). Each helper is inline-commented with what it does, why it exists, and any non-obvious design choices; if the set grows materially they'll be split out into their own file.
 
 ## Setting up a new machine
 
