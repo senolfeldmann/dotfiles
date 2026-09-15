@@ -149,17 +149,19 @@ Each step is wrapped in a clearly delimited section header (bold cyan banner) an
 | dnf                         | n/a   | ✓      | n/a            |
 | apt                         | n/a   | n/a    | ✓              |
 | Flatpak                     | n/a   | ✓      | ✓              |
-| mise (self + runtimes)      | ✓     | ✓      | ✓              |
+| mise (self + managed tools) | ✓     | ✓      | ✓              |
 | Oh My Zsh                   | ✓     | ✓      | ✓              |
 | tmux Plugin Manager (TPM)   | ✓     | ✓      | ✓              |
 
 The `--greedy` flag is deliberate policy, not an oversight: casks marked `auto_updates` are upgraded by brew too. In-app auto-updaters are switched off wherever the app has a setting for it (same for App Store auto-updates), so `update-all` is the single update path for everything brew and mas manage. Apps whose self-updater cannot be disabled keep updating themselves; `--greedy` simply reconciles brew's metadata with reality on the next run.
 
-Deliberately **not** covered: macOS system updates (`softwareupdate`). They need sudo, can force a reboot mid-run, and are better left to System Settings' auto-update - the Fedora equivalence (where `dnf upgrade` covers the OS) ends there. Also out of scope: apps installed outside any manager (e.g. CrossOver bottles) and self-updating application installed via native installers (e.g. Claude Code); they keep themselves current.
+`brew-auto-updates` lists every installed cask whose Homebrew metadata declares `auto_updates`, making it possible to work through those applications and disable their in-app updaters deliberately instead of relying on memory.
+
+macOS system updates are deliberately **not** covered. `softwareupdate --install --all` is too invasive for a routine package update: downloads and installation can take a long and unpredictable amount of time, interrupt active work, require or force a reboot, include firmware changes, and introduce compatibility-sensitive OS updates. They remain a conscious, separately initiated operation in System Settings; the Fedora equivalence, where `dnf upgrade` also covers the operating system, ends here. Also out of scope are apps installed outside any manager (e.g. CrossOver bottles) and self-updating applications installed via native installers (e.g. Claude Code); they keep themselves current.
 
 This is distinct from `apply.sh`: `update-all` upgrades versions of installed software, while `apply.sh` syncs the machine to the repo's package lists, symlinks, and tweaks. Both are safe to run any time; typical sequence after a `git pull` is `./scripts/apply.sh && update-all` (or run them separately depending on intent).
 
-`update-all` is the largest of a small set of shell helpers that live in [`file-links/home/.zaliases`](file-links/home/.zaliases) (currently also `agent`, which opens a Claude Code session in one of the personas under `~/agents/<name>/`). Each helper is inline-commented with what it does, why it exists, and any non-obvious design choices; if the set grows materially they'll be split out into their own file.
+`update-all` is the largest of a small set of shell helpers that live in [`file-links/home/.zaliases`](file-links/home/.zaliases) (currently also `brew-auto-updates` for inspecting self-updating casks and `agent`, which opens a Claude Code session in one of the personas under `~/agents/<name>/`). Each helper is inline-commented with what it does, why it exists, and any non-obvious design choices; if the set grows materially they'll be split out into their own file.
 
 ## Setting up a new machine
 

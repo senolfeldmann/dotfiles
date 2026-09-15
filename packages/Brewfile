@@ -41,10 +41,13 @@ brew "yt-dlp"
 
 # AI
 brew "hf"
+tap "anomalyco/tap", trusted: { formula: "opencode" }
+brew "anomalyco/tap/opencode"
 cask "chatgpt" if OS.mac?
 cask "codex" if OS.mac?
 cask "handy" if OS.mac?
 cask "lm-studio" if OS.mac?
+cask "opencode-desktop" if OS.mac?
 # Native menubar app with autostart and auto-update; conflicts with the
 # CLI-only `ollama` formula, pick one. On Linux, Ollama comes from the
 # official installer (systemd service, GPU setup): scripts/install-ollama.sh
@@ -71,9 +74,9 @@ if OS.mac?
   # Dev tools
   cask "dbeaver-community"
   cask "jetbrains-toolbox"
-  cask "postman"
   cask "redis-insight"
   cask "visual-studio-code"
+  cask "yaak"
 
   # Dev productivity
   cask "trailer"

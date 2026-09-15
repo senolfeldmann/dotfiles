@@ -27,6 +27,10 @@ if OS.mac?
     # Engineering
     cask "bambu-studio"
 
+    # iOS tooling
+    brew "ipatool"
+    brew "libimobiledevice"
+
     # Misc Tools
     cask "balenaetcher"
 

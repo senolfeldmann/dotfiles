@@ -73,7 +73,9 @@ update-all() {
     # the app allows it, brew is the single update path for casks.
     __ua_step "Homebrew (casks --greedy)" "brew upgrade --cask --greedy --yes"
     if command -v mas >/dev/null 2>&1; then
-      __ua_step "Mac App Store (mas)" "mas upgrade"
+      # mas 7 requires root privileges for App Store updates; `update` is
+      # the canonical command (`upgrade` remains only as an alias).
+      __ua_step "Mac App Store (mas)" "sudo mas update"
     fi
   elif command -v dnf >/dev/null 2>&1; then
     print -P "%F{cyan}%B::: Fedora%b%f"
@@ -95,11 +97,11 @@ update-all() {
     fi
   fi
 
-  # mise is installed via brew, so its updates are picked up by `brew upgrade`
-  # above. We only run `mise upgrade` here (no self-update) to refresh the
-  # installed runtimes per their mise.toml pinning.
+  # mise itself is upgraded by Homebrew above. Upgrade the globally managed
+  # tools within their configured compatibility ranges from $HOME, so a
+  # project-local mise.toml in the caller's cwd is never touched.
   if command -v mise >/dev/null 2>&1; then
-    __ua_step "mise (runtimes)" "mise upgrade"
+    __ua_step "mise (global tools)" 'mise upgrade --yes --cd "$HOME"'
   fi
 
   if [[ -n "$ZSH" && -d "$ZSH/tools" ]]; then
@@ -120,6 +122,38 @@ update-all() {
   done
 
   __ua_summary
+}
+
+# List installed Homebrew casks whose metadata declares an in-app updater.
+# These are the apps whose own auto-update setting should be disabled so
+# update-all remains the single deliberate update path.
+brew-auto-updates() {
+  if [[ "$OSTYPE" != "darwin"* ]]; then
+    print -u2 "brew-auto-updates: Homebrew casks are only used on macOS"
+    return 1
+  fi
+  if ! command -v brew >/dev/null 2>&1; then
+    print -u2 "brew-auto-updates: brew is not installed"
+    return 1
+  fi
+  if ! command -v jq >/dev/null 2>&1; then
+    print -u2 "brew-auto-updates: jq is required"
+    return 1
+  fi
+
+  setopt localoptions pipefail
+  local casks
+  if ! casks="$(brew info --json=v2 --cask --installed |
+      jq -r '[.casks[] | select(.auto_updates == true) | .token] | sort[]')"; then
+    print -u2 "brew-auto-updates: failed to query Homebrew cask metadata"
+    return 1
+  fi
+
+  if [[ -n "$casks" ]]; then
+    print -r -- "$casks"
+  else
+    print "No installed casks declare auto_updates."
+  fi
 }
 
 # agent: open a Claude Code session in one of the agent personas living
