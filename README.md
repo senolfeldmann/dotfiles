@@ -198,6 +198,8 @@ Configure git to use your newly imported key as your signing key:
 
 https://docs.github.com/en/authentication/managing-commit-signature-verification/telling-git-about-your-signing-key
 
+On macOS, `apply.sh` configures GPG signing to use Touch ID while the MacBook is open and the normal GPG-passphrase dialog while it is closed. `gpg-agent` caches an authenticated passphrase for a short time since its last use, with a longer maximum. The first signing operation may ask for Keychain access after Touch ID; allowing `pinentry-touchid` permanently removes that extra Keychain prompt, while every later retrieval remains protected by local authentication. `pinentry-mac` itself is prevented from silently reading or storing the passphrase.
+
 #### Clone the repo
 
 ```sh

@@ -1,0 +1,14 @@
+#!/bin/sh
+# pinentry-touchid's password fallback is unreliable when Touch ID cannot be
+# used. Select pinentry-mac before the protocol starts while the lid is closed.
+set -eu
+
+PINENTRY_MAC=/opt/homebrew/opt/pinentry-mac/bin/pinentry-mac
+PINENTRY_TOUCHID=/opt/homebrew/opt/pinentry-touchid/bin/pinentry-touchid
+
+if /usr/sbin/ioreg -r -k AppleClamshellState -d 4 |
+    /usr/bin/grep -q '"AppleClamshellState" = Yes'; then
+  exec "$PINENTRY_MAC" "$@"
+fi
+
+exec "$PINENTRY_TOUCHID" "$@"
