@@ -58,6 +58,21 @@ __ua_summary() {
   print
 }
 
+# pinentry-touchid checks Touch ID availability before handling -check/-fix.
+# With the lid closed it starts a pinentry server and waits for input instead.
+__ua_gpg_pinentry_fallback() {
+  local pinentry_prefix pinentry_mac pinentry_path
+  pinentry_prefix="$(brew --prefix pinentry)" || return
+  pinentry_mac="$(command -v pinentry-mac)" || return
+  pinentry_path="$pinentry_prefix/bin/pinentry"
+
+  if [[ "$(readlink -f "$pinentry_path")" == "$(readlink -f "$pinentry_mac")" ]]; then
+    return 0
+  fi
+
+  ln -sfn "$pinentry_mac" "$pinentry_path"
+}
+
 update-all() {
   __ua_ok=()
   __ua_fail=()
@@ -69,10 +84,12 @@ update-all() {
     # --formula keeps step 1 to formulae only: a bare `brew upgrade` would
     # also upgrade non-greedy casks and blur the two steps into each other.
     __ua_step "Homebrew (formulae)"       "brew update && brew upgrade --formula --yes"
-    # Upgrading Homebrew's pinentry formula can restore pinentry-curses as
-    # the default. Repair the GUI fallback expected by pinentry-touchid.
-    if command -v pinentry-touchid >/dev/null 2>&1; then
-      __ua_step "GPG pinentry fallback" "pinentry-touchid -check >/dev/null 2>&1 || pinentry-touchid -fix"
+    # pinentry-touchid uses Homebrew's default pinentry when a GPG passphrase
+    # must be entered instead of retrieved through Touch ID. A pinentry formula
+    # upgrade can reset that default to pinentry-curses, so restore pinentry-mac
+    # after each formula upgrade. See "GPG for git" in README.md for the flow.
+    if command -v pinentry-touchid >/dev/null 2>&1 && command -v pinentry-mac >/dev/null 2>&1; then
+      __ua_step "GPG pinentry fallback" "__ua_gpg_pinentry_fallback"
     fi
     # --greedy is deliberate policy: in-app auto-updates are disabled where
     # the app allows it, brew is the single update path for casks.

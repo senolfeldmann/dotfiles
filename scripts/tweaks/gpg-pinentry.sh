@@ -8,6 +8,7 @@ source "$SCRIPT_DIR/../_guards.sh"
 require_darwin
 require_ui
 require_command defaults
+require_command brew
 require_command gpgconf
 require_command pinentry-mac
 require_command pinentry-touchid
@@ -15,9 +16,13 @@ require_command pinentry-touchid
 [[ -x "$HOME/.local/bin/pinentry-gpg" ]] || skip "pinentry-gpg not linked"
 
 # pinentry-touchid delegates initial/password entry to Homebrew's default
-# pinentry. Keep that fallback on the GUI pinentry-mac implementation.
-if ! pinentry-touchid -check >/dev/null 2>&1; then
-  pinentry-touchid -fix
+# pinentry. Its -check/-fix flags hang with the lid closed, so inspect the
+# Homebrew symlink directly and keep the GUI fallback in place.
+PINENTRY_PREFIX="$(brew --prefix pinentry)"
+PINENTRY_PATH="$PINENTRY_PREFIX/bin/pinentry"
+PINENTRY_MAC="$(command -v pinentry-mac)"
+if [[ "$(readlink -f "$PINENTRY_PATH")" != "$(readlink -f "$PINENTRY_MAC")" ]]; then
+  ln -sfn "$PINENTRY_MAC" "$PINENTRY_PATH"
 fi
 
 # pinentry-mac must never fetch a stored passphrase silently. The Touch ID

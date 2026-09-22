@@ -198,7 +198,20 @@ Configure git to use your newly imported key as your signing key:
 
 https://docs.github.com/en/authentication/managing-commit-signature-verification/telling-git-about-your-signing-key
 
-On macOS, `apply.sh` configures GPG signing to use Touch ID while the MacBook is open and the normal GPG-passphrase dialog while it is closed. `gpg-agent` caches an authenticated passphrase for a short time since its last use, with a longer maximum. The first signing operation may ask for Keychain access after Touch ID; allowing `pinentry-touchid` permanently removes that extra Keychain prompt, while every later retrieval remains protected by local authentication. `pinentry-mac` itself is prevented from silently reading or storing the passphrase.
+On macOS, GPG passphrase entry has two separate routing decisions:
+
+```text
+gpg-agent (only when its passphrase cache misses)
+  -> ~/.local/bin/pinentry-gpg (chooses by lid state)
+     -> lid closed: pinentry-mac (GUI password dialog)
+     -> lid open:   pinentry-touchid
+                    -> Keychain entry exists: authenticate with Touch ID
+                    -> no entry yet: call default pinentry for a password
+```
+
+The last branch is why `apply.sh` points Homebrew's default `pinentry` symlink at `pinentry-mac`: the password prompt should be a GUI dialog, not `pinentry-curses` in a terminal. This symlink serves the open-lid `pinentry-touchid` path. With the lid closed, `pinentry-gpg` starts `pinentry-mac` directly. `gpg-agent` caches an authenticated passphrase for a short time since its last use, up to a longer maximum, so not every signing operation reaches either program.
+
+A Homebrew formula upgrade can replace that symlink, so `update-all` checks and repairs it immediately after upgrading formulae. It inspects the symlink directly: the installed `pinentry-touchid` checks Touch ID availability before processing its `-check` and `-fix` flags, and with the lid closed those flags start a pinentry server that waits for input. The first signing operation may ask for Keychain access after Touch ID; allowing `pinentry-touchid` permanently removes that extra Keychain prompt, while every later retrieval remains protected by local authentication. `pinentry-mac` itself is prevented from silently reading or storing the passphrase.
 
 #### Clone the repo
 
