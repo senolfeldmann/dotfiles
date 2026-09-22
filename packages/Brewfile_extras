@@ -13,10 +13,8 @@ if OS.mac?
     cask "crossover"
 
     # Entertainment
-    # client is native since mid-2025; x86 games still run under rosetta
-    cask "steam"
     tap "playcover/playcover"
-    cask "playcover/playcover/playcover-nightly"
+    cask "playcover/playcover/"
 
     # Multimedia
     cask "plex"
@@ -30,6 +28,7 @@ if OS.mac?
     # iOS tooling
     brew "ipatool"
     brew "libimobiledevice"
+    cask "impactor"
 
     # Misc Tools
     cask "balenaetcher"
@@ -53,10 +52,6 @@ if OS.mac?
     # System
     cask "appcleaner"
     cask "cinebench"
-    # both ship a kext: one-time Reduced Security + kext approval in
-    # RecoveryOS required; license activation stays manual
-    cask "paragon-ntfs"
-    cask "paragon-extfs"
     # for nsusbloader
     brew "libusb"
 
@@ -79,12 +74,19 @@ if OS.mac?
     # GeoDefense
 
     # Installed manually
-    # Temple Run
-    # Jetpack Joyride 2
-    # Pathfinder
-    # Photoshop
-    # Lightroom Classic
-    # Premiere
-    # Media Encoder
-    # Acrobat Pro
+
+        # Audition
+        # Photoshop
+        # Lightroom Classic
+        # Premiere
+        # Media Encoder
+        # Acrobat Pro
+
+
+        # both ship a kext: one-time Reduced Security + kext approval in
+        # RecoveryOS required
+        # Paragon NTFS
+
+        # brew cask not properly updated
+        # playcover-nightly
 end

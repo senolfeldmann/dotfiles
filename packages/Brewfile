@@ -51,7 +51,6 @@ cask "opencode-desktop" if OS.mac?
 # Native menubar app with autostart and auto-update; conflicts with the
 # CLI-only `ollama` formula, pick one. On Linux, Ollama comes from the
 # official installer (systemd service, GPU setup): scripts/install-ollama.sh
-cask "ollama-app" if OS.mac?
 
 # GPG
 if OS.mac?
@@ -71,15 +70,12 @@ if OS.mac?
   # "Manual", so the app never edits the symlinked rc files itself.
   cask "rancher"
 
-  # Dev tools
+  # Dev
   cask "dbeaver-community"
   cask "jetbrains-toolbox"
   cask "redis-insight"
   cask "visual-studio-code"
   cask "yaak"
-
-  # Dev productivity
-  cask "trailer"
 
   # System tools
   cask "betterdisplay"
@@ -89,6 +85,7 @@ if OS.mac?
   mas "Amphetamine", id: 937984704
   mas "Blackmagic Disk Speed Test", id: 425264550
   cask "alt-tab"
+  cask "daisydisk"
 
   # Peripherals
   cask "cursorsense"
@@ -96,6 +93,7 @@ if OS.mac?
   # needs rosetta
   cask "logitech-g-hub"
   cask "mos"
+  cask "darrylmorley/whatcable/whatcable"
 
   # Browsers
   cask "firefox"
