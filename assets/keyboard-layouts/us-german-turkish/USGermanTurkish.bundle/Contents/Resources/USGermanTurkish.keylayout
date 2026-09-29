@@ -1,0 +1,1312 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<!DOCTYPE keyboard SYSTEM "file://localhost/System/Library/DTDs/KeyboardLayout.dtd">
+<!-- Copyright (c) 2026 Şenol Feldmann. MIT License. -->
+<keyboard group="0" id="16029" name="US German Turkish" maxout="2">
+  <layouts><layout first="0" last="0" modifiers="USModifiers" mapSet="USKeys" /></layouts>
+  <modifierMap id="USModifiers" defaultIndex="0">
+    <keyMapSelect mapIndex="0">
+      <modifier keys="" />
+    </keyMapSelect>
+    <keyMapSelect mapIndex="1">
+      <modifier keys="anyShift caps?" />
+    </keyMapSelect>
+    <keyMapSelect mapIndex="2">
+      <modifier keys="caps" />
+    </keyMapSelect>
+    <keyMapSelect mapIndex="3">
+      <modifier keys="anyOption" />
+    </keyMapSelect>
+    <keyMapSelect mapIndex="4">
+      <modifier keys="anyShift caps? anyOption" />
+    </keyMapSelect>
+    <keyMapSelect mapIndex="5">
+      <modifier keys="caps anyOption" />
+    </keyMapSelect>
+    <keyMapSelect mapIndex="6">
+      <modifier keys="command anyShift? caps?" />
+    </keyMapSelect>
+    <keyMapSelect mapIndex="7">
+      <modifier keys="anyShift? caps? anyOption? command? anyControl" />
+    </keyMapSelect>
+    <keyMapSelect mapIndex="8">
+      <modifier keys="command anyOption caps?" />
+    </keyMapSelect>
+    <keyMapSelect mapIndex="9">
+      <modifier keys="command anyShift caps? anyOption" />
+    </keyMapSelect>
+  </modifierMap>
+  <keyMapSet id="USKeys">
+    <keyMap index="0">
+      <key code="0" action="compose_0_0" />
+      <key code="1" output="s" />
+      <key code="2" output="d" />
+      <key code="3" output="f" />
+      <key code="4" output="h" />
+      <key code="5" output="g" />
+      <key code="6" output="z" />
+      <key code="7" output="x" />
+      <key code="8" output="c" />
+      <key code="9" output="v" />
+      <key code="10" output="&#xA7;" />
+      <key code="11" output="b" />
+      <key code="12" output="q" />
+      <key code="13" output="w" />
+      <key code="14" action="compose_0_14" />
+      <key code="15" output="r" />
+      <key code="16" output="y" />
+      <key code="17" output="t" />
+      <key code="18" output="1" />
+      <key code="19" output="2" />
+      <key code="20" output="3" />
+      <key code="21" output="4" />
+      <key code="22" output="6" />
+      <key code="23" output="5" />
+      <key code="24" output="=" />
+      <key code="25" output="9" />
+      <key code="26" output="7" />
+      <key code="27" output="-" />
+      <key code="28" output="8" />
+      <key code="29" output="0" />
+      <key code="30" output="]" />
+      <key code="31" action="compose_0_31" />
+      <key code="32" action="compose_0_32" />
+      <key code="33" output="[" />
+      <key code="34" action="compose_0_34" />
+      <key code="35" output="p" />
+      <key code="36" output="&#xD;" />
+      <key code="37" output="l" />
+      <key code="38" action="compose_j_0" />
+      <key code="39" output="'" />
+      <key code="40" output="k" />
+      <key code="41" output=";" />
+      <key code="42" output="\" />
+      <key code="43" output="," />
+      <key code="44" output="/" />
+      <key code="45" action="compose_0_45" />
+      <key code="46" output="m" />
+      <key code="47" output="." />
+      <key code="48" output="&#x9;" />
+      <key code="49" action="compose_0_49" />
+      <key code="50" output="`" />
+      <key code="51" output="&#x8;" />
+      <key code="52" output="&#x3;" />
+      <key code="53" output="&#x1B;" />
+      <key code="65" output="." />
+      <key code="66" output="&#x1D;" />
+      <key code="67" output="*" />
+      <key code="69" output="+" />
+      <key code="70" output="&#x1C;" />
+      <key code="71" output="&#x1B;" />
+      <key code="72" output="&#x1F;" />
+      <key code="75" output="/" />
+      <key code="76" output="&#x3;" />
+      <key code="77" output="&#x1E;" />
+      <key code="78" output="-" />
+      <key code="81" output="=" />
+      <key code="82" output="0" />
+      <key code="83" output="1" />
+      <key code="84" output="2" />
+      <key code="85" output="3" />
+      <key code="86" output="4" />
+      <key code="87" output="5" />
+      <key code="88" output="6" />
+      <key code="89" output="7" />
+      <key code="91" output="8" />
+      <key code="92" output="9" />
+      <key code="96" output="&#x10;" />
+      <key code="97" output="&#x10;" />
+      <key code="98" output="&#x10;" />
+      <key code="99" output="&#x10;" />
+      <key code="100" output="&#x10;" />
+      <key code="101" output="&#x10;" />
+      <key code="102" output="&#x10;" />
+      <key code="103" output="&#x10;" />
+      <key code="104" output="&#x10;" />
+      <key code="105" output="&#x10;" />
+      <key code="106" output="&#x10;" />
+      <key code="107" output="&#x10;" />
+      <key code="108" output="&#x10;" />
+      <key code="109" output="&#x10;" />
+      <key code="110" output="&#x10;" />
+      <key code="111" output="&#x10;" />
+      <key code="112" output="&#x10;" />
+      <key code="113" output="&#x10;" />
+      <key code="114" output="&#x5;" />
+      <key code="115" output="&#x1;" />
+      <key code="116" output="&#xB;" />
+      <key code="117" output="&#x7F;" />
+      <key code="118" output="&#x10;" />
+      <key code="119" output="&#x4;" />
+      <key code="120" output="&#x10;" />
+      <key code="121" output="&#xC;" />
+      <key code="122" output="&#x10;" />
+      <key code="123" output="&#x1C;" />
+      <key code="124" output="&#x1D;" />
+      <key code="125" output="&#x1F;" />
+      <key code="126" output="&#x1E;" />
+    </keyMap>
+    <keyMap index="1">
+      <key code="0" action="compose_1_0" />
+      <key code="1" output="S" />
+      <key code="2" output="D" />
+      <key code="3" output="F" />
+      <key code="4" output="H" />
+      <key code="5" output="G" />
+      <key code="6" output="Z" />
+      <key code="7" output="X" />
+      <key code="8" output="C" />
+      <key code="9" output="V" />
+      <key code="10" output="&#xB1;" />
+      <key code="11" output="B" />
+      <key code="12" output="Q" />
+      <key code="13" output="W" />
+      <key code="14" action="compose_1_14" />
+      <key code="15" output="R" />
+      <key code="16" output="Y" />
+      <key code="17" output="T" />
+      <key code="18" output="!" />
+      <key code="19" output="@" />
+      <key code="20" output="#" />
+      <key code="21" output="$" />
+      <key code="22" output="^" />
+      <key code="23" output="%" />
+      <key code="24" output="+" />
+      <key code="25" output="(" />
+      <key code="26" output="&amp;" />
+      <key code="27" output="_" />
+      <key code="28" output="*" />
+      <key code="29" output=")" />
+      <key code="30" output="}" />
+      <key code="31" action="compose_1_31" />
+      <key code="32" action="compose_1_32" />
+      <key code="33" output="{" />
+      <key code="34" action="compose_1_34" />
+      <key code="35" output="P" />
+      <key code="36" output="&#xD;" />
+      <key code="37" output="L" />
+      <key code="38" action="compose_j_1" />
+      <key code="39" output="&quot;" />
+      <key code="40" output="K" />
+      <key code="41" output=":" />
+      <key code="42" output="|" />
+      <key code="43" output="&lt;" />
+      <key code="44" output="?" />
+      <key code="45" action="compose_1_45" />
+      <key code="46" output="M" />
+      <key code="47" output="&gt;" />
+      <key code="48" output="&#x9;" />
+      <key code="49" action="compose_1_49" />
+      <key code="50" output="~" />
+      <key code="51" output="&#x8;" />
+      <key code="52" output="&#x3;" />
+      <key code="53" output="&#x1B;" />
+      <key code="65" output="." />
+      <key code="66" output="*" />
+      <key code="67" output="*" />
+      <key code="69" output="+" />
+      <key code="70" output="+" />
+      <key code="71" output="&#x1B;" />
+      <key code="72" output="=" />
+      <key code="75" output="/" />
+      <key code="76" output="&#x3;" />
+      <key code="77" output="/" />
+      <key code="78" output="-" />
+      <key code="81" output="=" />
+      <key code="82" output="0" />
+      <key code="83" output="1" />
+      <key code="84" output="2" />
+      <key code="85" output="3" />
+      <key code="86" output="4" />
+      <key code="87" output="5" />
+      <key code="88" output="6" />
+      <key code="89" output="7" />
+      <key code="91" output="8" />
+      <key code="92" output="9" />
+      <key code="96" output="&#x10;" />
+      <key code="97" output="&#x10;" />
+      <key code="98" output="&#x10;" />
+      <key code="99" output="&#x10;" />
+      <key code="100" output="&#x10;" />
+      <key code="101" output="&#x10;" />
+      <key code="102" output="&#x10;" />
+      <key code="103" output="&#x10;" />
+      <key code="104" output="&#x10;" />
+      <key code="105" output="&#x10;" />
+      <key code="106" output="&#x10;" />
+      <key code="107" output="&#x10;" />
+      <key code="108" output="&#x10;" />
+      <key code="109" output="&#x10;" />
+      <key code="110" output="&#x10;" />
+      <key code="111" output="&#x10;" />
+      <key code="112" output="&#x10;" />
+      <key code="113" output="&#x10;" />
+      <key code="114" output="&#x5;" />
+      <key code="115" output="&#x1;" />
+      <key code="116" output="&#xB;" />
+      <key code="117" output="&#x7F;" />
+      <key code="118" output="&#x10;" />
+      <key code="119" output="&#x4;" />
+      <key code="120" output="&#x10;" />
+      <key code="121" output="&#xC;" />
+      <key code="122" output="&#x10;" />
+      <key code="123" output="&#x1C;" />
+      <key code="124" output="&#x1D;" />
+      <key code="125" output="&#x1F;" />
+      <key code="126" output="&#x1E;" />
+    </keyMap>
+    <keyMap index="2">
+      <key code="0" action="compose_2_0" />
+      <key code="1" output="S" />
+      <key code="2" output="D" />
+      <key code="3" output="F" />
+      <key code="4" output="H" />
+      <key code="5" output="G" />
+      <key code="6" output="Z" />
+      <key code="7" output="X" />
+      <key code="8" output="C" />
+      <key code="9" output="V" />
+      <key code="10" output="&#xA7;" />
+      <key code="11" output="B" />
+      <key code="12" output="Q" />
+      <key code="13" output="W" />
+      <key code="14" action="compose_2_14" />
+      <key code="15" output="R" />
+      <key code="16" output="Y" />
+      <key code="17" output="T" />
+      <key code="18" output="1" />
+      <key code="19" output="2" />
+      <key code="20" output="3" />
+      <key code="21" output="4" />
+      <key code="22" output="6" />
+      <key code="23" output="5" />
+      <key code="24" output="=" />
+      <key code="25" output="9" />
+      <key code="26" output="7" />
+      <key code="27" output="-" />
+      <key code="28" output="8" />
+      <key code="29" output="0" />
+      <key code="30" output="]" />
+      <key code="31" action="compose_2_31" />
+      <key code="32" action="compose_2_32" />
+      <key code="33" output="[" />
+      <key code="34" action="compose_2_34" />
+      <key code="35" output="P" />
+      <key code="36" output="&#xD;" />
+      <key code="37" output="L" />
+      <key code="38" output="J" />
+      <key code="39" output="'" />
+      <key code="40" output="K" />
+      <key code="41" output=";" />
+      <key code="42" output="\" />
+      <key code="43" output="," />
+      <key code="44" output="/" />
+      <key code="45" action="compose_2_45" />
+      <key code="46" output="M" />
+      <key code="47" output="." />
+      <key code="48" output="&#x9;" />
+      <key code="49" action="compose_2_49" />
+      <key code="50" output="`" />
+      <key code="51" output="&#x8;" />
+      <key code="52" output="&#x3;" />
+      <key code="53" output="&#x1B;" />
+      <key code="65" output="." />
+      <key code="66" output="&#x1D;" />
+      <key code="67" output="*" />
+      <key code="69" output="+" />
+      <key code="70" output="&#x1C;" />
+      <key code="71" output="&#x1B;" />
+      <key code="72" output="&#x1F;" />
+      <key code="75" output="/" />
+      <key code="76" output="&#x3;" />
+      <key code="77" output="&#x1E;" />
+      <key code="78" output="-" />
+      <key code="81" output="=" />
+      <key code="82" output="0" />
+      <key code="83" output="1" />
+      <key code="84" output="2" />
+      <key code="85" output="3" />
+      <key code="86" output="4" />
+      <key code="87" output="5" />
+      <key code="88" output="6" />
+      <key code="89" output="7" />
+      <key code="91" output="8" />
+      <key code="92" output="9" />
+      <key code="96" output="&#x10;" />
+      <key code="97" output="&#x10;" />
+      <key code="98" output="&#x10;" />
+      <key code="99" output="&#x10;" />
+      <key code="100" output="&#x10;" />
+      <key code="101" output="&#x10;" />
+      <key code="102" output="&#x10;" />
+      <key code="103" output="&#x10;" />
+      <key code="104" output="&#x10;" />
+      <key code="105" output="&#x10;" />
+      <key code="106" output="&#x10;" />
+      <key code="107" output="&#x10;" />
+      <key code="108" output="&#x10;" />
+      <key code="109" output="&#x10;" />
+      <key code="110" output="&#x10;" />
+      <key code="111" output="&#x10;" />
+      <key code="112" output="&#x10;" />
+      <key code="113" output="&#x10;" />
+      <key code="114" output="&#x5;" />
+      <key code="115" output="&#x1;" />
+      <key code="116" output="&#xB;" />
+      <key code="117" output="&#x7F;" />
+      <key code="118" output="&#x10;" />
+      <key code="119" output="&#x4;" />
+      <key code="120" output="&#x10;" />
+      <key code="121" output="&#xC;" />
+      <key code="122" output="&#x10;" />
+      <key code="123" output="&#x1C;" />
+      <key code="124" output="&#x1D;" />
+      <key code="125" output="&#x1F;" />
+      <key code="126" output="&#x1E;" />
+    </keyMap>
+    <keyMap index="3">
+      <key code="0" output="&#xE4;" />
+      <key code="1" output="&#xDF;" />
+      <key code="2" output="&#x15F;" />
+      <key code="3" output="&#x192;" />
+      <key code="4" output="&#x2D9;" />
+      <key code="5" output="&#x11F;" />
+      <key code="6" output="&#x3A9;" />
+      <key code="7" output="&#x2248;" />
+      <key code="8" output="&#xE7;" />
+      <key code="9" output="&#x221A;" />
+      <key code="10" output="&#xA7;" />
+      <key code="11" output="&#x222B;" />
+      <key code="12" output="&#x153;" />
+      <key code="13" output="&#x2211;" />
+      <key code="14" action="dead_acute" />
+      <key code="15" output="&#xAE;" />
+      <key code="16" output="&#xA5;" />
+      <key code="17" output="&#x2020;" />
+      <key code="18" output="&#xA1;" />
+      <key code="19" output="&#x2122;" />
+      <key code="20" output="&#xA3;" />
+      <key code="21" output="&#xA2;" />
+      <key code="22" output="&#xA7;" />
+      <key code="23" output="&#x221E;" />
+      <key code="24" output="&#x2260;" />
+      <key code="25" output="&#xAA;" />
+      <key code="26" output="&#xB6;" />
+      <key code="27" output="&#x2013;" />
+      <key code="28" output="&#x2022;" />
+      <key code="29" output="&#xBA;" />
+      <key code="30" output="&#x2018;" />
+      <key code="31" output="&#xF6;" />
+      <key code="32" output="&#xFC;" />
+      <key code="33" output="&#x201C;" />
+      <key code="34" output="&#x131;" />
+      <key code="35" output="&#x3C0;" />
+      <key code="36" output="&#xD;" />
+      <key code="37" output="&#xAC;" />
+      <key code="38" output="&#x2206;" />
+      <key code="39" output="&#xE6;" />
+      <key code="40" output="&#x2DA;" />
+      <key code="41" output="&#x2026;" />
+      <key code="42" output="&#xAB;" />
+      <key code="43" output="&#x2264;" />
+      <key code="44" output="&#xF7;" />
+      <key code="45" action="dead_tilde" />
+      <key code="46" output="&#xB5;" />
+      <key code="47" output="&#x2265;" />
+      <key code="48" output="&#x9;" />
+      <key code="49" output="&#xA0;" />
+      <key code="50" action="dead_grave" />
+      <key code="51" output="&#x8;" />
+      <key code="52" output="&#x3;" />
+      <key code="53" output="&#x1B;" />
+      <key code="65" output="." />
+      <key code="66" output="&#x1D;" />
+      <key code="67" output="*" />
+      <key code="69" output="+" />
+      <key code="70" output="&#x1C;" />
+      <key code="71" output="&#x1B;" />
+      <key code="72" output="&#x1F;" />
+      <key code="75" output="/" />
+      <key code="76" output="&#x3;" />
+      <key code="77" output="&#x1E;" />
+      <key code="78" output="-" />
+      <key code="81" output="=" />
+      <key code="82" output="0" />
+      <key code="83" output="1" />
+      <key code="84" output="2" />
+      <key code="85" output="3" />
+      <key code="86" output="4" />
+      <key code="87" output="5" />
+      <key code="88" output="6" />
+      <key code="89" output="7" />
+      <key code="91" output="8" />
+      <key code="92" output="9" />
+      <key code="96" output="&#x10;" />
+      <key code="97" output="&#x10;" />
+      <key code="98" output="&#x10;" />
+      <key code="99" output="&#x10;" />
+      <key code="100" output="&#x10;" />
+      <key code="101" output="&#x10;" />
+      <key code="102" output="&#x10;" />
+      <key code="103" output="&#x10;" />
+      <key code="104" output="&#x10;" />
+      <key code="105" output="&#x10;" />
+      <key code="106" output="&#x10;" />
+      <key code="107" output="&#x10;" />
+      <key code="108" output="&#x10;" />
+      <key code="109" output="&#x10;" />
+      <key code="110" output="&#x10;" />
+      <key code="111" output="&#x10;" />
+      <key code="112" output="&#x10;" />
+      <key code="113" output="&#x10;" />
+      <key code="114" output="&#x5;" />
+      <key code="115" output="&#x1;" />
+      <key code="116" output="&#xB;" />
+      <key code="117" output="&#x7F;" />
+      <key code="118" output="&#x10;" />
+      <key code="119" output="&#x4;" />
+      <key code="120" output="&#x10;" />
+      <key code="121" output="&#xC;" />
+      <key code="122" output="&#x10;" />
+      <key code="123" output="&#x1C;" />
+      <key code="124" output="&#x1D;" />
+      <key code="125" output="&#x1F;" />
+      <key code="126" output="&#x1E;" />
+    </keyMap>
+    <keyMap index="4">
+      <key code="0" output="&#xC4;" />
+      <key code="1" output="&#x1E9E;" />
+      <key code="2" output="&#x15E;" />
+      <key code="3" output="&#xCF;" />
+      <key code="4" output="&#xD3;" />
+      <key code="5" output="&#x11E;" />
+      <key code="6" output="&#xB8;" />
+      <key code="7" output="&#x2DB;" />
+      <key code="8" output="&#xC7;" />
+      <key code="9" output="&#x25CA;" />
+      <key code="10" output="&#xB1;" />
+      <key code="11" output="&#x131;" />
+      <key code="12" output="&#x152;" />
+      <key code="13" output="&#x201E;" />
+      <key code="14" output="&#xB4;" />
+      <key code="15" output="&#x2030;" />
+      <key code="16" output="&#xC1;" />
+      <key code="17" output="&#x2C7;" />
+      <key code="18" output="&#x2044;" />
+      <key code="19" output="&#x20AC;" />
+      <key code="20" output="&#x2039;" />
+      <key code="21" output="&#x203A;" />
+      <key code="22" output="&#xFB02;" />
+      <key code="23" output="&#xFB01;" />
+      <key code="24" output="&#xB1;" />
+      <key code="25" output="&#xB7;" />
+      <key code="26" output="&#x2021;" />
+      <key code="27" output="&#x2014;" />
+      <key code="28" output="&#xB0;" />
+      <key code="29" output="&#x201A;" />
+      <key code="30" output="&#x2019;" />
+      <key code="31" output="&#xD6;" />
+      <key code="32" output="&#xDC;" />
+      <key code="33" output="&#x201D;" />
+      <key code="34" output="&#x130;" />
+      <key code="35" output="&#x220F;" />
+      <key code="36" output="&#xD;" />
+      <key code="37" output="&#xD2;" />
+      <key code="38" output="&#xD4;" />
+      <key code="39" output="&#xC6;" />
+      <key code="40" output="&#xF8FF;" />
+      <key code="41" output="&#xDA;" />
+      <key code="42" output="&#xBB;" />
+      <key code="43" output="&#xAF;" />
+      <key code="44" output="&#xBF;" />
+      <key code="45" output="&#x2DC;" />
+      <key code="46" output="&#xC2;" />
+      <key code="47" output="&#x2D8;" />
+      <key code="48" output="&#x9;" />
+      <key code="49" output="&#xA0;" />
+      <key code="50" output="`" />
+      <key code="51" output="&#x8;" />
+      <key code="52" output="&#x3;" />
+      <key code="53" output="&#x1B;" />
+      <key code="65" output="." />
+      <key code="66" output="*" />
+      <key code="67" output="*" />
+      <key code="69" output="+" />
+      <key code="70" output="+" />
+      <key code="71" output="&#x1B;" />
+      <key code="72" output="=" />
+      <key code="75" output="/" />
+      <key code="76" output="&#x3;" />
+      <key code="77" output="/" />
+      <key code="78" output="-" />
+      <key code="81" output="=" />
+      <key code="82" output="0" />
+      <key code="83" output="1" />
+      <key code="84" output="2" />
+      <key code="85" output="3" />
+      <key code="86" output="4" />
+      <key code="87" output="5" />
+      <key code="88" output="6" />
+      <key code="89" output="7" />
+      <key code="91" output="8" />
+      <key code="92" output="9" />
+      <key code="96" output="&#x10;" />
+      <key code="97" output="&#x10;" />
+      <key code="98" output="&#x10;" />
+      <key code="99" output="&#x10;" />
+      <key code="100" output="&#x10;" />
+      <key code="101" output="&#x10;" />
+      <key code="102" output="&#x10;" />
+      <key code="103" output="&#x10;" />
+      <key code="104" output="&#x10;" />
+      <key code="105" output="&#x10;" />
+      <key code="106" output="&#x10;" />
+      <key code="107" output="&#x10;" />
+      <key code="108" output="&#x10;" />
+      <key code="109" output="&#x10;" />
+      <key code="110" output="&#x10;" />
+      <key code="111" output="&#x10;" />
+      <key code="112" output="&#x10;" />
+      <key code="113" output="&#x10;" />
+      <key code="114" output="&#x5;" />
+      <key code="115" output="&#x1;" />
+      <key code="116" output="&#xB;" />
+      <key code="117" output="&#x7F;" />
+      <key code="118" output="&#x10;" />
+      <key code="119" output="&#x4;" />
+      <key code="120" output="&#x10;" />
+      <key code="121" output="&#xC;" />
+      <key code="122" output="&#x10;" />
+      <key code="123" output="&#x1C;" />
+      <key code="124" output="&#x1D;" />
+      <key code="125" output="&#x1F;" />
+      <key code="126" output="&#x1E;" />
+    </keyMap>
+    <keyMap index="5">
+      <key code="0" output="&#xC4;" />
+      <key code="1" output="&#x1E9E;" />
+      <key code="2" output="&#x15E;" />
+      <key code="3" output="&#xCF;" />
+      <key code="4" output="&#xD3;" />
+      <key code="5" output="&#x11E;" />
+      <key code="6" output="&#x3A9;" />
+      <key code="7" output="&#x2248;" />
+      <key code="8" output="&#xC7;" />
+      <key code="9" output="&#x221A;" />
+      <key code="10" output="&#xA7;" />
+      <key code="11" output="&#x131;" />
+      <key code="12" output="&#x152;" />
+      <key code="13" output="&#x2211;" />
+      <key code="14" output="&#xB4;" />
+      <key code="15" output="&#xAE;" />
+      <key code="16" output="&#xC1;" />
+      <key code="17" output="&#x2020;" />
+      <key code="18" output="&#xA1;" />
+      <key code="19" output="&#x2122;" />
+      <key code="20" output="&#xA3;" />
+      <key code="21" output="&#xA2;" />
+      <key code="22" output="&#xA7;" />
+      <key code="23" output="&#x221E;" />
+      <key code="24" output="&#x2260;" />
+      <key code="25" output="&#xAA;" />
+      <key code="26" output="&#xB6;" />
+      <key code="27" output="&#x2013;" />
+      <key code="28" output="&#x2022;" />
+      <key code="29" output="&#xBA;" />
+      <key code="30" output="&#x2018;" />
+      <key code="31" output="&#xD6;" />
+      <key code="32" output="&#xDC;" />
+      <key code="33" output="&#x201C;" />
+      <key code="34" output="&#x130;" />
+      <key code="35" output="&#x220F;" />
+      <key code="36" output="&#xD;" />
+      <key code="37" output="&#xD2;" />
+      <key code="38" output="&#xD4;" />
+      <key code="39" output="&#xC6;" />
+      <key code="40" output="&#x2DA;" />
+      <key code="41" output="&#x2026;" />
+      <key code="42" output="&#xAB;" />
+      <key code="43" output="&#x2264;" />
+      <key code="44" output="&#xF7;" />
+      <key code="45" output="&#x2DC;" />
+      <key code="46" output="&#xC2;" />
+      <key code="47" output="&#x2265;" />
+      <key code="48" output="&#x9;" />
+      <key code="49" output="&#xA0;" />
+      <key code="50" output="`" />
+      <key code="51" output="&#x8;" />
+      <key code="52" output="&#x3;" />
+      <key code="53" output="&#x1B;" />
+      <key code="65" output="." />
+      <key code="66" output="&#x1D;" />
+      <key code="67" output="*" />
+      <key code="69" output="+" />
+      <key code="70" output="&#x1C;" />
+      <key code="71" output="&#x1B;" />
+      <key code="72" output="&#x1F;" />
+      <key code="75" output="/" />
+      <key code="76" output="&#x3;" />
+      <key code="77" output="&#x1E;" />
+      <key code="78" output="-" />
+      <key code="81" output="=" />
+      <key code="82" output="0" />
+      <key code="83" output="1" />
+      <key code="84" output="2" />
+      <key code="85" output="3" />
+      <key code="86" output="4" />
+      <key code="87" output="5" />
+      <key code="88" output="6" />
+      <key code="89" output="7" />
+      <key code="91" output="8" />
+      <key code="92" output="9" />
+      <key code="96" output="&#x10;" />
+      <key code="97" output="&#x10;" />
+      <key code="98" output="&#x10;" />
+      <key code="99" output="&#x10;" />
+      <key code="100" output="&#x10;" />
+      <key code="101" output="&#x10;" />
+      <key code="102" output="&#x10;" />
+      <key code="103" output="&#x10;" />
+      <key code="104" output="&#x10;" />
+      <key code="105" output="&#x10;" />
+      <key code="106" output="&#x10;" />
+      <key code="107" output="&#x10;" />
+      <key code="108" output="&#x10;" />
+      <key code="109" output="&#x10;" />
+      <key code="110" output="&#x10;" />
+      <key code="111" output="&#x10;" />
+      <key code="112" output="&#x10;" />
+      <key code="113" output="&#x10;" />
+      <key code="114" output="&#x5;" />
+      <key code="115" output="&#x1;" />
+      <key code="116" output="&#xB;" />
+      <key code="117" output="&#x7F;" />
+      <key code="118" output="&#x10;" />
+      <key code="119" output="&#x4;" />
+      <key code="120" output="&#x10;" />
+      <key code="121" output="&#xC;" />
+      <key code="122" output="&#x10;" />
+      <key code="123" output="&#x1C;" />
+      <key code="124" output="&#x1D;" />
+      <key code="125" output="&#x1F;" />
+      <key code="126" output="&#x1E;" />
+    </keyMap>
+    <keyMap index="6">
+      <key code="0" action="compose_6_0" />
+      <key code="1" output="s" />
+      <key code="2" output="d" />
+      <key code="3" output="f" />
+      <key code="4" output="h" />
+      <key code="5" output="g" />
+      <key code="6" output="z" />
+      <key code="7" output="x" />
+      <key code="8" output="c" />
+      <key code="9" output="v" />
+      <key code="10" output="&#xA7;" />
+      <key code="11" output="b" />
+      <key code="12" output="q" />
+      <key code="13" output="w" />
+      <key code="14" action="compose_6_14" />
+      <key code="15" output="r" />
+      <key code="16" output="y" />
+      <key code="17" output="t" />
+      <key code="18" output="1" />
+      <key code="19" output="2" />
+      <key code="20" output="3" />
+      <key code="21" output="4" />
+      <key code="22" output="6" />
+      <key code="23" output="5" />
+      <key code="24" output="=" />
+      <key code="25" output="9" />
+      <key code="26" output="7" />
+      <key code="27" output="-" />
+      <key code="28" output="8" />
+      <key code="29" output="0" />
+      <key code="30" output="]" />
+      <key code="31" action="compose_6_31" />
+      <key code="32" action="compose_6_32" />
+      <key code="33" output="[" />
+      <key code="34" action="compose_6_34" />
+      <key code="35" output="p" />
+      <key code="36" output="&#xD;" />
+      <key code="37" output="l" />
+      <key code="38" action="compose_j_6" />
+      <key code="39" output="'" />
+      <key code="40" output="k" />
+      <key code="41" output=";" />
+      <key code="42" output="\" />
+      <key code="43" output="," />
+      <key code="44" output="/" />
+      <key code="45" action="compose_6_45" />
+      <key code="46" output="m" />
+      <key code="47" output="." />
+      <key code="48" output="&#x9;" />
+      <key code="49" action="compose_6_49" />
+      <key code="50" output="`" />
+      <key code="51" output="&#x8;" />
+      <key code="52" output="&#x3;" />
+      <key code="53" output="&#x1B;" />
+      <key code="65" output="." />
+      <key code="66" output="&#x1D;" />
+      <key code="67" output="*" />
+      <key code="69" output="+" />
+      <key code="70" output="&#x1C;" />
+      <key code="71" output="&#x1B;" />
+      <key code="72" output="&#x1F;" />
+      <key code="75" output="/" />
+      <key code="76" output="&#x3;" />
+      <key code="77" output="&#x1E;" />
+      <key code="78" output="-" />
+      <key code="81" output="=" />
+      <key code="82" output="0" />
+      <key code="83" output="1" />
+      <key code="84" output="2" />
+      <key code="85" output="3" />
+      <key code="86" output="4" />
+      <key code="87" output="5" />
+      <key code="88" output="6" />
+      <key code="89" output="7" />
+      <key code="91" output="8" />
+      <key code="92" output="9" />
+      <key code="96" output="&#x10;" />
+      <key code="97" output="&#x10;" />
+      <key code="98" output="&#x10;" />
+      <key code="99" output="&#x10;" />
+      <key code="100" output="&#x10;" />
+      <key code="101" output="&#x10;" />
+      <key code="102" output="&#x10;" />
+      <key code="103" output="&#x10;" />
+      <key code="104" output="&#x10;" />
+      <key code="105" output="&#x10;" />
+      <key code="106" output="&#x10;" />
+      <key code="107" output="&#x10;" />
+      <key code="108" output="&#x10;" />
+      <key code="109" output="&#x10;" />
+      <key code="110" output="&#x10;" />
+      <key code="111" output="&#x10;" />
+      <key code="112" output="&#x10;" />
+      <key code="113" output="&#x10;" />
+      <key code="114" output="&#x5;" />
+      <key code="115" output="&#x1;" />
+      <key code="116" output="&#xB;" />
+      <key code="117" output="&#x7F;" />
+      <key code="118" output="&#x10;" />
+      <key code="119" output="&#x4;" />
+      <key code="120" output="&#x10;" />
+      <key code="121" output="&#xC;" />
+      <key code="122" output="&#x10;" />
+      <key code="123" output="&#x1C;" />
+      <key code="124" output="&#x1D;" />
+      <key code="125" output="&#x1F;" />
+      <key code="126" output="&#x1E;" />
+    </keyMap>
+    <keyMap index="7">
+      <key code="0" output="&#x1;" />
+      <key code="1" output="&#x13;" />
+      <key code="2" output="&#x4;" />
+      <key code="3" output="&#x6;" />
+      <key code="4" output="&#x8;" />
+      <key code="5" output="&#x7;" />
+      <key code="6" output="&#x1A;" />
+      <key code="7" output="&#x18;" />
+      <key code="8" output="&#x3;" />
+      <key code="9" output="&#x16;" />
+      <key code="10" output="0" />
+      <key code="11" output="&#x2;" />
+      <key code="12" output="&#x11;" />
+      <key code="13" output="&#x17;" />
+      <key code="14" output="&#x5;" />
+      <key code="15" output="&#x12;" />
+      <key code="16" output="&#x19;" />
+      <key code="17" output="&#x14;" />
+      <key code="18" output="1" />
+      <key code="19" output="2" />
+      <key code="20" output="3" />
+      <key code="21" output="4" />
+      <key code="22" output="6" />
+      <key code="23" output="5" />
+      <key code="24" output="=" />
+      <key code="25" output="9" />
+      <key code="26" output="7" />
+      <key code="27" output="&#x1F;" />
+      <key code="28" output="8" />
+      <key code="29" output="0" />
+      <key code="30" output="&#x1D;" />
+      <key code="31" output="&#xF;" />
+      <key code="32" output="&#x15;" />
+      <key code="33" output="&#x1B;" />
+      <key code="34" output="&#x9;" />
+      <key code="35" output="&#x10;" />
+      <key code="36" output="&#xD;" />
+      <key code="37" output="&#xC;" />
+      <key code="38" output="&#xA;" />
+      <key code="39" output="'" />
+      <key code="40" output="&#xB;" />
+      <key code="41" output=";" />
+      <key code="42" output="&#x1C;" />
+      <key code="43" output="," />
+      <key code="44" output="/" />
+      <key code="45" output="&#xE;" />
+      <key code="46" output="&#xD;" />
+      <key code="47" output="." />
+      <key code="48" output="&#x9;" />
+      <key code="49" action="compose_control_space" />
+      <key code="50" output="`" />
+      <key code="51" output="&#x8;" />
+      <key code="52" output="&#x3;" />
+      <key code="53" output="&#x1B;" />
+      <key code="65" output="." />
+      <key code="66" output="&#x1D;" />
+      <key code="67" output="*" />
+      <key code="69" output="+" />
+      <key code="70" output="&#x1C;" />
+      <key code="71" output="&#x1B;" />
+      <key code="72" output="&#x1F;" />
+      <key code="75" output="/" />
+      <key code="76" output="&#x3;" />
+      <key code="77" output="&#x1E;" />
+      <key code="78" output="-" />
+      <key code="81" output="=" />
+      <key code="82" output="0" />
+      <key code="83" output="1" />
+      <key code="84" output="2" />
+      <key code="85" output="3" />
+      <key code="86" output="4" />
+      <key code="87" output="5" />
+      <key code="88" output="6" />
+      <key code="89" output="7" />
+      <key code="91" output="8" />
+      <key code="92" output="9" />
+      <key code="96" output="&#x10;" />
+      <key code="97" output="&#x10;" />
+      <key code="98" output="&#x10;" />
+      <key code="99" output="&#x10;" />
+      <key code="100" output="&#x10;" />
+      <key code="101" output="&#x10;" />
+      <key code="102" output="&#x10;" />
+      <key code="103" output="&#x10;" />
+      <key code="104" output="&#x10;" />
+      <key code="105" output="&#x10;" />
+      <key code="106" output="&#x10;" />
+      <key code="107" output="&#x10;" />
+      <key code="108" output="&#x10;" />
+      <key code="109" output="&#x10;" />
+      <key code="110" output="&#x10;" />
+      <key code="111" output="&#x10;" />
+      <key code="112" output="&#x10;" />
+      <key code="113" output="&#x10;" />
+      <key code="114" output="&#x5;" />
+      <key code="115" output="&#x1;" />
+      <key code="116" output="&#xB;" />
+      <key code="117" output="&#x7F;" />
+      <key code="118" output="&#x10;" />
+      <key code="119" output="&#x4;" />
+      <key code="120" output="&#x10;" />
+      <key code="121" output="&#xC;" />
+      <key code="122" output="&#x10;" />
+      <key code="123" output="&#x1C;" />
+      <key code="124" output="&#x1D;" />
+      <key code="125" output="&#x1F;" />
+      <key code="126" output="&#x1E;" />
+    </keyMap>
+    <keyMap index="8">
+      <key code="0" output="&#xE5;" />
+      <key code="1" output="&#xDF;" />
+      <key code="2" output="&#x2202;" />
+      <key code="3" output="&#x192;" />
+      <key code="4" output="&#x2D9;" />
+      <key code="5" output="&#xA9;" />
+      <key code="6" output="&#x3A9;" />
+      <key code="7" output="&#x2248;" />
+      <key code="8" output="&#xE7;" />
+      <key code="9" output="&#x221A;" />
+      <key code="10" output="&#xA7;" />
+      <key code="11" output="&#x222B;" />
+      <key code="12" output="&#x153;" />
+      <key code="13" output="&#x2211;" />
+      <key code="14" output="&#xB4;" />
+      <key code="15" output="&#xAE;" />
+      <key code="16" output="&#xA5;" />
+      <key code="17" output="&#x2020;" />
+      <key code="18" output="&#xA1;" />
+      <key code="19" output="&#x2122;" />
+      <key code="20" output="&#xA3;" />
+      <key code="21" output="&#xA2;" />
+      <key code="22" output="&#xA7;" />
+      <key code="23" output="&#x221E;" />
+      <key code="24" output="&#x2260;" />
+      <key code="25" output="&#xAA;" />
+      <key code="26" output="&#xB6;" />
+      <key code="27" output="&#x2013;" />
+      <key code="28" output="&#x2022;" />
+      <key code="29" output="&#xBA;" />
+      <key code="30" output="&#x2018;" />
+      <key code="31" output="&#xF8;" />
+      <key code="32" output="&#xA8;" />
+      <key code="33" output="&#x201C;" />
+      <key code="34" output="^" />
+      <key code="35" output="&#x3C0;" />
+      <key code="36" output="&#xD;" />
+      <key code="37" output="&#xAC;" />
+      <key code="38" output="&#x2206;" />
+      <key code="39" output="&#xE6;" />
+      <key code="40" output="&#x2DA;" />
+      <key code="41" output="&#x2026;" />
+      <key code="42" output="&#xAB;" />
+      <key code="43" output="&#x2264;" />
+      <key code="44" output="&#xF7;" />
+      <key code="45" output="~" />
+      <key code="46" output="&#xB5;" />
+      <key code="47" output="&#x2265;" />
+      <key code="48" output="&#x9;" />
+      <key code="49" output="&#xA0;" />
+      <key code="50" output="`" />
+      <key code="51" output="&#x8;" />
+      <key code="52" output="&#x3;" />
+      <key code="53" output="&#x1B;" />
+      <key code="65" output="." />
+      <key code="66" output="&#x1D;" />
+      <key code="67" output="*" />
+      <key code="69" output="+" />
+      <key code="70" output="&#x1C;" />
+      <key code="71" output="&#x1B;" />
+      <key code="72" output="&#x1F;" />
+      <key code="75" output="/" />
+      <key code="76" output="&#x3;" />
+      <key code="77" output="&#x1E;" />
+      <key code="78" output="-" />
+      <key code="81" output="=" />
+      <key code="82" output="0" />
+      <key code="83" output="1" />
+      <key code="84" output="2" />
+      <key code="85" output="3" />
+      <key code="86" output="4" />
+      <key code="87" output="5" />
+      <key code="88" output="6" />
+      <key code="89" output="7" />
+      <key code="91" output="8" />
+      <key code="92" output="9" />
+      <key code="96" output="&#x10;" />
+      <key code="97" output="&#x10;" />
+      <key code="98" output="&#x10;" />
+      <key code="99" output="&#x10;" />
+      <key code="100" output="&#x10;" />
+      <key code="101" output="&#x10;" />
+      <key code="102" output="&#x10;" />
+      <key code="103" output="&#x10;" />
+      <key code="104" output="&#x10;" />
+      <key code="105" output="&#x10;" />
+      <key code="106" output="&#x10;" />
+      <key code="107" output="&#x10;" />
+      <key code="108" output="&#x10;" />
+      <key code="109" output="&#x10;" />
+      <key code="110" output="&#x10;" />
+      <key code="111" output="&#x10;" />
+      <key code="112" output="&#x10;" />
+      <key code="113" output="&#x10;" />
+      <key code="114" output="&#x5;" />
+      <key code="115" output="&#x1;" />
+      <key code="116" output="&#xB;" />
+      <key code="117" output="&#x7F;" />
+      <key code="118" output="&#x10;" />
+      <key code="119" output="&#x4;" />
+      <key code="120" output="&#x10;" />
+      <key code="121" output="&#xC;" />
+      <key code="122" output="&#x10;" />
+      <key code="123" output="&#x1C;" />
+      <key code="124" output="&#x1D;" />
+      <key code="125" output="&#x1F;" />
+      <key code="126" output="&#x1E;" />
+    </keyMap>
+    <keyMap index="9">
+      <key code="0" output="&#xC5;" />
+      <key code="1" output="&#xCD;" />
+      <key code="2" output="&#xCE;" />
+      <key code="3" output="&#xCF;" />
+      <key code="4" output="&#xD3;" />
+      <key code="5" output="&#x2DD;" />
+      <key code="6" output="&#xB8;" />
+      <key code="7" output="&#x2DB;" />
+      <key code="8" output="&#xC7;" />
+      <key code="9" output="&#x25CA;" />
+      <key code="10" output="&#xB1;" />
+      <key code="11" output="&#x131;" />
+      <key code="12" output="&#x152;" />
+      <key code="13" output="&#x201E;" />
+      <key code="14" output="&#xB4;" />
+      <key code="15" output="&#x2030;" />
+      <key code="16" output="&#xC1;" />
+      <key code="17" output="&#x2C7;" />
+      <key code="18" output="&#x2044;" />
+      <key code="19" output="&#x20AC;" />
+      <key code="20" output="&#x2039;" />
+      <key code="21" output="&#x203A;" />
+      <key code="22" output="&#xFB02;" />
+      <key code="23" output="&#xFB01;" />
+      <key code="24" output="&#xB1;" />
+      <key code="25" output="&#xB7;" />
+      <key code="26" output="&#x2021;" />
+      <key code="27" output="&#x2014;" />
+      <key code="28" output="&#xB0;" />
+      <key code="29" output="&#x201A;" />
+      <key code="30" output="&#x2019;" />
+      <key code="31" output="&#xD8;" />
+      <key code="32" output="&#xA8;" />
+      <key code="33" output="&#x201D;" />
+      <key code="34" output="&#x2C6;" />
+      <key code="35" output="&#x220F;" />
+      <key code="36" output="&#xD;" />
+      <key code="37" output="&#xD2;" />
+      <key code="38" output="&#xD4;" />
+      <key code="39" output="&#xC6;" />
+      <key code="40" output="&#xF8FF;" />
+      <key code="41" output="&#xDA;" />
+      <key code="42" output="&#xBB;" />
+      <key code="43" output="&#xAF;" />
+      <key code="44" output="&#xBF;" />
+      <key code="45" output="&#x2DC;" />
+      <key code="46" output="&#xC2;" />
+      <key code="47" output="&#x2D8;" />
+      <key code="48" output="&#x9;" />
+      <key code="49" output="&#xA0;" />
+      <key code="50" output="`" />
+      <key code="51" output="&#x8;" />
+      <key code="52" output="&#x3;" />
+      <key code="53" output="&#x1B;" />
+      <key code="65" output="." />
+      <key code="66" output="*" />
+      <key code="67" output="*" />
+      <key code="69" output="+" />
+      <key code="70" output="+" />
+      <key code="71" output="&#x1B;" />
+      <key code="72" output="=" />
+      <key code="75" output="/" />
+      <key code="76" output="&#x3;" />
+      <key code="77" output="/" />
+      <key code="78" output="-" />
+      <key code="81" output="=" />
+      <key code="82" output="0" />
+      <key code="83" output="1" />
+      <key code="84" output="2" />
+      <key code="85" output="3" />
+      <key code="86" output="4" />
+      <key code="87" output="5" />
+      <key code="88" output="6" />
+      <key code="89" output="7" />
+      <key code="91" output="8" />
+      <key code="92" output="9" />
+      <key code="96" output="&#x10;" />
+      <key code="97" output="&#x10;" />
+      <key code="98" output="&#x10;" />
+      <key code="99" output="&#x10;" />
+      <key code="100" output="&#x10;" />
+      <key code="101" output="&#x10;" />
+      <key code="102" output="&#x10;" />
+      <key code="103" output="&#x10;" />
+      <key code="104" output="&#x10;" />
+      <key code="105" output="&#x10;" />
+      <key code="106" output="&#x10;" />
+      <key code="107" output="&#x10;" />
+      <key code="108" output="&#x10;" />
+      <key code="109" output="&#x10;" />
+      <key code="110" output="&#x10;" />
+      <key code="111" output="&#x10;" />
+      <key code="112" output="&#x10;" />
+      <key code="113" output="&#x10;" />
+      <key code="114" output="&#x5;" />
+      <key code="115" output="&#x1;" />
+      <key code="116" output="&#xB;" />
+      <key code="117" output="&#x7F;" />
+      <key code="118" output="&#x10;" />
+      <key code="119" output="&#x4;" />
+      <key code="120" output="&#x10;" />
+      <key code="121" output="&#xC;" />
+      <key code="122" output="&#x10;" />
+      <key code="123" output="&#x1C;" />
+      <key code="124" output="&#x1D;" />
+      <key code="125" output="&#x1F;" />
+      <key code="126" output="&#x1E;" />
+    </keyMap>
+  </keyMapSet>
+  <actions>
+    <action id="compose_control_space">
+      <when state="none" output=" " />
+      <when state="acute" output="&#xB4;" />
+      <when state="grave" output="`" />
+      <when state="tilde" output="&#x2DC;" />
+    </action>
+    <action id="compose_j_0">
+      <when state="none" output="j" />
+      <when state="acute" output="j&#x301;" />
+    </action>
+    <action id="compose_j_1">
+      <when state="none" output="J" />
+      <when state="acute" output="J&#x301;" />
+    </action>
+    <action id="compose_j_6">
+      <when state="none" output="j" />
+      <when state="acute" output="j&#x301;" />
+    </action>
+    <action id="compose_space">
+      <when state="none" output=" " />
+      <when state="acute" output="&#xB4;" />
+      <when state="grave" output="`" />
+      <when state="tilde" output="&#x2DC;" />
+    </action>
+    <action id="dead_acute"><when state="none" next="acute" /></action>
+    <action id="dead_grave"><when state="none" next="grave" /></action>
+    <action id="dead_tilde"><when state="none" next="tilde" /></action>
+    <action id="compose_0_0">
+      <when state="none" output="a" />
+      <when state="acute" output="&#xE1;" />
+      <when state="grave" output="&#xE0;" />
+      <when state="tilde" output="&#xE3;" />
+    </action>
+    <action id="compose_0_14">
+      <when state="none" output="e" />
+      <when state="acute" output="&#xE9;" />
+      <when state="grave" output="&#xE8;" />
+    </action>
+    <action id="compose_0_31">
+      <when state="none" output="o" />
+      <when state="acute" output="&#xF3;" />
+      <when state="grave" output="&#xF2;" />
+      <when state="tilde" output="&#xF5;" />
+    </action>
+    <action id="compose_0_32">
+      <when state="none" output="u" />
+      <when state="acute" output="&#xFA;" />
+      <when state="grave" output="&#xF9;" />
+    </action>
+    <action id="compose_0_34">
+      <when state="none" output="i" />
+      <when state="acute" output="&#xED;" />
+      <when state="grave" output="&#xEC;" />
+    </action>
+    <action id="compose_0_45">
+      <when state="none" output="n" />
+      <when state="tilde" output="&#xF1;" />
+    </action>
+    <action id="compose_0_49">
+      <when state="none" output=" " />
+      <when state="acute" output="&#xB4;" />
+      <when state="grave" output="`" />
+      <when state="tilde" output="&#x2DC;" />
+    </action>
+    <action id="compose_1_0">
+      <when state="none" output="A" />
+      <when state="acute" output="&#xC1;" />
+      <when state="grave" output="&#xC0;" />
+      <when state="tilde" output="&#xC3;" />
+    </action>
+    <action id="compose_1_14">
+      <when state="none" output="E" />
+      <when state="acute" output="&#xC9;" />
+      <when state="grave" output="&#xC8;" />
+    </action>
+    <action id="compose_1_31">
+      <when state="none" output="O" />
+      <when state="acute" output="&#xD3;" />
+      <when state="grave" output="&#xD2;" />
+      <when state="tilde" output="&#xD5;" />
+    </action>
+    <action id="compose_1_32">
+      <when state="none" output="U" />
+      <when state="acute" output="&#xDA;" />
+      <when state="grave" output="&#xD9;" />
+    </action>
+    <action id="compose_1_34">
+      <when state="none" output="I" />
+      <when state="acute" output="&#xCD;" />
+      <when state="grave" output="&#xCC;" />
+    </action>
+    <action id="compose_1_45">
+      <when state="none" output="N" />
+      <when state="tilde" output="&#xD1;" />
+    </action>
+    <action id="compose_1_49">
+      <when state="none" output=" " />
+      <when state="acute" output="&#xB4;" />
+      <when state="grave" output="`" />
+      <when state="tilde" output="&#x2DC;" />
+    </action>
+    <action id="compose_2_0">
+      <when state="none" output="A" />
+      <when state="acute" output="&#xC1;" />
+      <when state="grave" output="&#xC0;" />
+      <when state="tilde" output="&#xC3;" />
+    </action>
+    <action id="compose_2_14">
+      <when state="none" output="E" />
+      <when state="acute" output="&#xC9;" />
+      <when state="grave" output="&#xC8;" />
+    </action>
+    <action id="compose_2_31">
+      <when state="none" output="O" />
+      <when state="acute" output="&#xD3;" />
+      <when state="grave" output="&#xD2;" />
+      <when state="tilde" output="&#xD5;" />
+    </action>
+    <action id="compose_2_32">
+      <when state="none" output="U" />
+      <when state="acute" output="&#xDA;" />
+      <when state="grave" output="&#xD9;" />
+    </action>
+    <action id="compose_2_34">
+      <when state="none" output="I" />
+      <when state="acute" output="&#xCD;" />
+      <when state="grave" output="&#xCC;" />
+    </action>
+    <action id="compose_2_45">
+      <when state="none" output="N" />
+      <when state="tilde" output="&#xD1;" />
+    </action>
+    <action id="compose_2_49">
+      <when state="none" output=" " />
+      <when state="acute" output="&#xB4;" />
+      <when state="grave" output="`" />
+      <when state="tilde" output="&#x2DC;" />
+    </action>
+    <action id="compose_6_0">
+      <when state="none" output="a" />
+      <when state="acute" output="&#xE1;" />
+      <when state="grave" output="&#xE0;" />
+      <when state="tilde" output="&#xE3;" />
+    </action>
+    <action id="compose_6_14">
+      <when state="none" output="e" />
+      <when state="acute" output="&#xE9;" />
+      <when state="grave" output="&#xE8;" />
+    </action>
+    <action id="compose_6_31">
+      <when state="none" output="o" />
+      <when state="acute" output="&#xF3;" />
+      <when state="grave" output="&#xF2;" />
+      <when state="tilde" output="&#xF5;" />
+    </action>
+    <action id="compose_6_32">
+      <when state="none" output="u" />
+      <when state="acute" output="&#xFA;" />
+      <when state="grave" output="&#xF9;" />
+    </action>
+    <action id="compose_6_34">
+      <when state="none" output="i" />
+      <when state="acute" output="&#xED;" />
+      <when state="grave" output="&#xEC;" />
+    </action>
+    <action id="compose_6_45">
+      <when state="none" output="n" />
+      <when state="tilde" output="&#xF1;" />
+    </action>
+    <action id="compose_6_49">
+      <when state="none" output=" " />
+      <when state="acute" output="&#xB4;" />
+      <when state="grave" output="`" />
+      <when state="tilde" output="&#x2DC;" />
+    </action>
+  </actions>
+  <terminators>
+    <when state="acute" output="&#xB4;" />
+    <when state="grave" output="`" />
+    <when state="tilde" output="&#x2DC;" />
+  </terminators>
+</keyboard>

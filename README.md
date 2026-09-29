@@ -262,7 +262,7 @@ This requires your user password and modifies system-level user metadata, so it 
 10. **Ollama**: `install-ollama.sh` (Linux only, official installer: systemd service + GPU support; on macOS Ollama is the `ollama-app` cask)
 11. **Oh My Zsh**: `setup-zsh.sh` (depends on zsh from step 4)
 12. **mise runtimes**: `setup-mise.sh` (depends on mise from step 6; includes Rust via mise's rustup delegation)
-13. **Tweaks**: `tweaks/_run.sh` (KDE settings, flatpak overrides, docker group + daemon, etc.; the desktop-only tweaks skip themselves under `--no-ui`)
+13. **Tweaks**: `tweaks/_run.sh` (KDE settings, macOS keyboard layout, flatpak overrides, docker group + daemon, etc.; the desktop-only tweaks skip themselves under `--no-ui`)
 
 The order follows tool dependencies: things that produce a tool come before things that consume it. `install-brew.sh` is a special case worth flagging: brew internally calls `sudo -k` as a safety measure (it refuses to run as root and clears any lingering authorization to enforce that). On a shared TTY that would kill the parent shell's sudo cache and force a second password prompt at Tweaks. To keep the single-prompt invariant, `install-brew.sh` wraps `brew bundle` in `script(1)`, giving brew its own pseudo-TTY; with sudo's default `tty_tickets=on`, the cache is keyed by TTY, so brew's `sudo -k` only clears the (empty) PTY timestamp and the parent cache stays alive.
 

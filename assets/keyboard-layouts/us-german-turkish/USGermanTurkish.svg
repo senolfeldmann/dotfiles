@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <mask id="glyphs">
+      <rect x="32" y="32" width="960" height="960" rx="216" fill="#fff"/>
+      <text x="512" y="608" fill="#000" font-family="SF Pro Display, Helvetica Neue, Helvetica, Arial, sans-serif" font-size="440" font-weight="700" text-anchor="middle">US</text>
+      <path d="M92 718h840 M512 750v112" stroke="#000" stroke-width="18"/>
+      <text x="296" y="844" fill="#000" font-family="SF Pro Display, Helvetica Neue, Helvetica, Arial, sans-serif" font-size="120" font-weight="600" text-anchor="middle">DE</text>
+      <text x="728" y="844" fill="#000" font-family="SF Pro Display, Helvetica Neue, Helvetica, Arial, sans-serif" font-size="120" font-weight="600" text-anchor="middle">TR</text>
+    </mask>
+  </defs>
+  <rect x="32" y="32" width="960" height="960" rx="216" fill="#000" mask="url(#glyphs)"/>
+</svg>

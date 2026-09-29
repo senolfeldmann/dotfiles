@@ -12,10 +12,6 @@ if OS.mac?
     # (native arm64 build announced for CrossOver 27, not shipped yet)
     cask "crossover"
 
-    # Entertainment
-    tap "playcover/playcover"
-    cask "playcover/playcover/"
-
     # Multimedia
     cask "plex"
     cask "iina"
