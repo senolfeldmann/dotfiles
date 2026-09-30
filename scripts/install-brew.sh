@@ -44,12 +44,9 @@ run_bundle() {
 # is trusted (HOMEBREW_REQUIRE_TAP_TRUST defaults to on). Trust the taps the
 # Brewfiles use before bundling; idempotent, stored in ~/.homebrew/trust.json.
 if [[ "$OSTYPE" == "darwin"* ]]; then
-  brew trust --tap teamookla/speedtest jorgelbg/tap playcover/playcover
+  brew trust --tap teamookla/speedtest jorgelbg/tap
 fi
 
-# Brewfile is the productivity baseline; Brewfile_extras holds the personal
-# extras (entertainment, media tooling) that a pure work machine would skip.
-# On such a machine, comment the second line out or run this script's steps
-# manually with just the first file.
+# Both files contain tools selected for the work environment.
 run_bundle "$REPO_DIR/packages/Brewfile"
 run_bundle "$REPO_DIR/packages/Brewfile_extras"

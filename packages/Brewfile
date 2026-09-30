@@ -18,11 +18,9 @@ brew "zsh-history-substring-search"
 brew "zsh-syntax-highlighting"
 
 # Dev
-cask "chromedriver" if OS.mac?
 brew "mise"
 
 # Dev tools
-brew "awscli"
 brew "lazydocker"
 brew "k6"
 # Kubernetes
@@ -37,7 +35,6 @@ brew "memtester"
 # on Fedora it comes from Ookla's dnf repo (see setup-fedora-repos.sh).
 tap "teamookla/speedtest" if OS.mac?
 brew "speedtest" if OS.mac?
-brew "yt-dlp"
 
 # AI
 brew "hf"
@@ -46,11 +43,7 @@ brew "anomalyco/tap/opencode"
 cask "chatgpt" if OS.mac?
 cask "codex" if OS.mac?
 cask "handy" if OS.mac?
-cask "lm-studio" if OS.mac?
 cask "opencode-desktop" if OS.mac?
-# Native menubar app with autostart and auto-update; conflicts with the
-# CLI-only `ollama` formula, pick one. On Linux, Ollama comes from the
-# official installer (systemd service, GPU setup): scripts/install-ollama.sh
 
 # GPG
 if OS.mac?
@@ -65,27 +58,22 @@ if OS.mac?
   # Docker: Rancher Desktop provides the VM/daemon AND its own matching
   # CLIs (docker, buildx, compose, kubectl, nerdctl, helm) in ~/.rd/bin;
   # separate brew formulae would just drift against the daemon version.
-  # ~/.rd/bin is added to PATH in .zshrc. One-time app setting: set
+  # ~/.rd/bin is added to PATH in .zprofile. One-time app setting: set
   # Preferences -> Application -> Environment -> Path Management to
   # "Manual", so the app never edits the symlinked rc files itself.
   cask "rancher"
 
   # Dev
   cask "dbeaver-community"
-  cask "jetbrains-toolbox"
-  cask "redis-insight"
   cask "visual-studio-code"
   cask "yaak"
 
   # System tools
   cask "betterdisplay"
-  cask "coconutbattery"
   # Waiting for stable Thaw to support macOS 27.
   # cask "thaw"
   mas "Amphetamine", id: 937984704
-  mas "Blackmagic Disk Speed Test", id: 425264550
   cask "alt-tab"
-  cask "daisydisk"
 
   # Peripherals
   cask "cursorsense"
@@ -93,32 +81,26 @@ if OS.mac?
   # needs rosetta
   cask "logitech-g-hub"
   cask "mos"
-  cask "darrylmorley/whatcable/whatcable"
 
   # Browsers
   cask "firefox"
   cask "google-chrome"
 
   # Misc
-  cask "anydesk"
   cask "gifox"
   cask "windows-app"
-  cask "teamviewer"
   cask "the-unarchiver"
 
   # Security
   cask "keepassxc"
-  cask "nordvpn"
   mas "Strongbox Pro", id: 1481853033
 
   # Productivity
-  cask "alfred"
   mas "Be Focused Pro", id: 961632517
   cask "joplin"
   mas "Magnet", id: 441258766
 
   # Art
-  cask "blender"
   cask "paintbrush"
   cask "inkscape"
 
@@ -133,26 +115,8 @@ if OS.mac?
   # Multimedia
   # Manually installed:
   # DisplayCAL (Python 3 fork): https://github.com/eoyilmaz/displaycal-py3/releases
-  mas "Soundwaves", id: 1482688534
   cask "spotify"
 
   # Communication
   cask "microsoft-teams"
-  cask "telegram"
-  mas "WhatsApp", id: 310633997
-
-  # Cloud
-  cask "nextcloud"
-
-  # VM
-  cask "crystalfetch"
-  cask "utm"
 end
-
-# Manually installed:
-# excel
-# onenote
-# outlook
-# powerpoint
-# word
-# peazip

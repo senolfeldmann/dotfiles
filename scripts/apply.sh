@@ -96,6 +96,14 @@ section "OS packages"
 section "Homebrew (tool)"
 "$SCRIPT_DIR/setup-homebrew.sh"
 
+# The installer runs in a child process; its PATH changes cannot reach this
+# shell. Activate the installed Homebrew before starting package consumers.
+for brew_path in /opt/homebrew/bin/brew /usr/local/bin/brew /home/linuxbrew/.linuxbrew/bin/brew; do
+  [[ -x "$brew_path" ]] || continue
+  eval "$("$brew_path" shellenv bash)"
+  break
+done
+
 # install-brew.sh wraps `brew bundle` in script(1) so brew's internal
 # `sudo -k` does not invalidate the parent sudo cache. See the comment at
 # the top of install-brew.sh for the full reasoning.
@@ -110,9 +118,6 @@ section "Fonts"
 
 section "Claude Code"
 "$SCRIPT_DIR/install-claude-code.sh"
-
-section "Ollama"
-"$SCRIPT_DIR/install-ollama.sh"
 
 section "Oh My Zsh"
 "$SCRIPT_DIR/setup-zsh.sh"

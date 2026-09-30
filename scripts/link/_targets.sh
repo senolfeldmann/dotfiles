@@ -25,12 +25,12 @@ target_dir() {
   case "$1" in
     home)   echo "$HOME" ;;
     config) echo "$HOME/.config" ;;
-    # Claude Code config; sources may live in a private repo (see EXTRA_REPO_DIRS)
+    # Claude Code config
     claude) echo "$HOME/.claude" ;;
-    # Codex CLI config (config.toml, global AGENTS.md); sources in the private repo
+    # Codex CLI config (config.toml, global AGENTS.md)
     codex)  echo "$HOME/.codex" ;;
     # Agent-Skills-standard shared location (~/.agents/skills), read by Codex
-    # and other AGENTS.md-standard harnesses; sources in the private repo
+    # and other AGENTS.md-standard harnesses
     agents) echo "$HOME/.agents" ;;
     *)
       echo "target_dir: unknown target '$1'" >&2
@@ -39,14 +39,5 @@ target_dir() {
   esac
 }
 
-# Extra repos linked with the same file-links/ + dir-links/ layout as this
-# one. The repo containing the link scripts is always linked first; each path
-# here is linked after it, in order. Missing paths are skipped (the linkers
-# guard with -d), so a public fork without these repos, or a machine that has
-# not cloned a private repo yet, simply links what it has.
-#
-# To add another private/work repo: clone it, give it file-links/<target>/
-# and/or dir-links/<target>/ subtrees, and add its absolute path below.
-EXTRA_REPO_DIRS=(
-  "$HOME/dotfiles-private"
-)
+# This work setup links only its own repository.
+EXTRA_REPO_DIRS=()

@@ -60,6 +60,3 @@ vulkan-headers
 vulkan-loader-devel
 spirv-headers-devel
 spirv-tools-devel
-
-# mount.cifs for the SMB shares set up in tweaks/cifs-mounts.sh
-cifs-utils

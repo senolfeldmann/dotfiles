@@ -1,4 +1,6 @@
 # Şenol's dotfiles
+This copy is prepared for the work environment. It is maintained independently; Before the first work commit, set the work Git identity and signing key in `file-links/home/.gitconfig`.
+
 This repo holds my dotfiles and packages. **macOS is the primary target**; **Fedora KDE Plasma Desktop (43+)** is the secondary system for Linux-only work (dual boot and VMs); **Ubuntu/Debian** is supported as a terminal-only target for servers and the occasional WSL2 instance. Except for the package-manager-specific parts, everything *should* work on any distribution of your choice.
 
 This repo serves multiple purposes:
@@ -122,10 +124,10 @@ apps/                → app-specific configs for manual import
 
 Two orthogonal splits inside `packages/`:
 
-- **`Brewfile` vs `Brewfile_extras`**: productivity baseline vs personal extras (entertainment, media tooling). Nothing secret about the second file; it is what I would *not* install on a pure work machine. `install-brew.sh` bundles both.
+- **`Brewfile` vs `Brewfile_extras`**: baseline vs additional selected tools. Both files are part of this work setup; `install-brew.sh` bundles both.
 - **`dnf.txt`/`apt.txt` vs `dnf-ui.txt`/`apt-ui.txt`**: terminal baseline vs desktop-only packages. The `-ui` lists (plus Flatpaks, Nerd Fonts and desktop tweaks) are skipped when `apply.sh` runs with `--no-ui`, so servers and minimal VMs stay lean.
 
-The two link trees mirror each other in shape but differ in what they symlink. `file-links/` is for single files in shared destinations (e.g. `.zshrc` in `$HOME` next to other dotfiles you do not own); `dir-links/` is for whole directories you take over completely (e.g. a `~/.config/<tool>/` directory where any file the tool drops should land in a tracked repo). Both are driven by the same shared target map (`scripts/link/_targets.sh`) and the same precheck that detects conflicts between them. The linkers also read `EXTRA_REPO_DIRS` in `scripts/link/_targets.sh`, so the same trees can be sourced from additional repos alongside this one. I use that for a private sibling repo (`~/dotfiles-private`, same `file-links`/`dir-links` layout) holding what does not belong in public: personal Claude Code config, machine-specific values like NAS share definitions. The split rule: this repo documents *interfaces* (variable names, layouts, guards), the private one holds *values*. A machine without the private repo simply links what it has - the linkers skip missing repos. See `scripts/link/`.
+The two link trees mirror each other in shape but differ in what they symlink. `file-links/` is for single files in shared destinations (e.g. `.zshrc` in `$HOME` next to other dotfiles you do not own); `dir-links/` is for whole directories you take over completely (e.g. a `~/.config/<tool>/` directory where any file the tool drops should land in a tracked repo). Both are driven by the same shared target map (`scripts/link/_targets.sh`) and the same precheck that detects conflicts between them. This work setup links only its own repository: `EXTRA_REPO_DIRS` is empty. Work-specific agent configuration can use the existing target directories in this repository. See `scripts/link/`.
 
 Each tree additionally has OS-scoped siblings (`file-links.linux/`, `file-links.darwin/`, same for `dir-links`): content there is linked only when `uname` matches, so an OS-specific config (kitty on Linux, for example) never shows up as a meaningless symlink on the other OS. The linkers walk the common tree plus the matching OS tree per repo; the conflict precheck covers all trees active on the current OS, while the same destination in `.linux` and `.darwin` is deliberately legal (per-OS variants of one config).
 
@@ -159,7 +161,7 @@ The `--greedy` flag is deliberate policy, not an oversight: casks marked `auto_u
 
 `brew-auto-updates` lists every installed cask whose Homebrew metadata declares `auto_updates`, making it possible to work through those applications and disable their in-app updaters deliberately instead of relying on memory.
 
-macOS system updates are deliberately **not** covered. `softwareupdate --install --all` is too invasive for a routine package update: downloads and installation can take a long and unpredictable amount of time, interrupt active work, require or force a reboot, include firmware changes, and introduce compatibility-sensitive OS updates. They remain a conscious, separately initiated operation in System Settings; the Fedora equivalence, where `dnf upgrade` also covers the operating system, ends here. Also out of scope are apps installed outside any manager (e.g. CrossOver bottles) and self-updating applications installed via native installers (e.g. Claude Code); they keep themselves current.
+macOS system updates are deliberately **not** covered. `softwareupdate --install --all` is too invasive for a routine package update: downloads and installation can take a long and unpredictable amount of time, interrupt active work, require or force a reboot, include firmware changes, and introduce compatibility-sensitive OS updates. They remain a conscious, separately initiated operation in System Settings; the Fedora equivalence, where `dnf upgrade` also covers the operating system, ends here. Also out of scope are apps installed outside any manager and self-updating applications installed via native installers (e.g. Claude Code); they keep themselves current.
 
 This is distinct from `apply.sh`: `update-all` upgrades versions of installed software, while `apply.sh` syncs the machine to the repo's package lists, symlinks, and tweaks. Both are safe to run any time; typical sequence after a `git pull` is `./scripts/apply.sh && update-all` (or run them separately depending on intent).
 
@@ -187,7 +189,7 @@ https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generati
 
 #### GPG for git
 
-Import your private GPG key like this:
+After the first apply has installed GPG, import the key you want to use for work:
 
 ```sh
 gpg --import <keyfile.asc>
@@ -196,7 +198,7 @@ gpg --edit-key <KeyID>
 trust
 ```
 
-Configure git to use your newly imported key as your signing key:
+Set your work name, email and imported signing key in `file-links/home/.gitconfig` before the first work commit. Signing remains enabled for commits and tags. Configure git to use your newly imported key as your signing key:
 
 https://docs.github.com/en/authentication/managing-commit-signature-verification/telling-git-about-your-signing-key
 
@@ -218,7 +220,7 @@ A Homebrew formula upgrade can replace that symlink, so `update-all` checks and 
 #### Clone the repo
 
 ```sh
-git clone git@github.com:senolfeldmann/dotfiles.git
+git clone <work-repository-url> dotfiles
 ```
 
 ### Run apply
@@ -227,6 +229,8 @@ git clone git@github.com:senolfeldmann/dotfiles.git
 cd dotfiles
 ./scripts/apply.sh
 ```
+
+For the initial handover, a snapshot of these files can be copied to `~/dotfiles` and imported into the work Git repository. Keep the working files; the previous Git history is not required. After apply, finish the GPG and Git identity steps above, import the iTerm settings manually, and set Rancher Desktop's Path Management to `Manual`.
 
 On a machine without a desktop (server, minimal VM, WSL), run it in terminal-only mode instead:
 
@@ -256,15 +260,14 @@ This requires your user password and modifies system-level user metadata, so it 
 2. **Symlinks**: `link/link-dirs.sh` then `link/link-files.sh`, both in unattended mode. Directory-level symlinks first (structural takeovers), then file-level symlinks. Both run a shared precheck that aborts if `file-links/` and `dir-links/` would target overlapping paths. Existing real files or directories at the destination get backed up to `.bak`, then symlinked.
 3. **Fedora repos**: `setup-fedora-repos.sh` (skips on non-Fedora)
 4. **OS packages**: `install-dnf.sh`, `install-dnf-extras.sh`, `install-apt.sh` (each skips if its package manager isn't present; the `-ui` package lists are skipped under `--no-ui`)
-5. **Homebrew tool**: `setup-homebrew.sh` (installs Brew itself if missing)
+5. **Homebrew tool**: `setup-homebrew.sh` (installs Brew itself if missing); apply then activates its shell environment for the remaining steps
 6. **Homebrew packages**: `install-brew.sh` (`brew bundle` from `packages/Brewfile`, then `packages/Brewfile_extras`)
 7. **Flatpaks**: `install-flatpak.sh` (skipped under `--no-ui`)
 8. **Nerd fonts**: `install-nerd-fonts.sh` (skipped under `--no-ui`; on macOS the fonts come from Brew casks instead)
 9. **Claude Code**: `install-claude-code.sh` (official installer on every OS; deliberately no Brew cask, one update channel)
-10. **Ollama**: `install-ollama.sh` (Linux only, official installer: systemd service + GPU support; on macOS Ollama is the `ollama-app` cask)
-11. **Oh My Zsh**: `setup-zsh.sh` (depends on zsh from step 4)
-12. **mise runtimes**: `setup-mise.sh` (depends on mise from step 6; includes Rust via mise's rustup delegation)
-13. **Tweaks**: `tweaks/_run.sh` (KDE settings, macOS keyboard layout, flatpak overrides, docker group + daemon, etc.; the desktop-only tweaks skip themselves under `--no-ui`)
+10. **Oh My Zsh**: `setup-zsh.sh` (depends on zsh from step 4)
+11. **mise runtimes**: `setup-mise.sh` (depends on mise from step 6; includes Rust via mise's rustup delegation)
+12. **Tweaks**: `tweaks/_run.sh` (KDE settings, macOS keyboard layout, GPG pinentry, docker group + daemon and ydotool; the desktop-only tweaks skip themselves under `--no-ui`)
 
 The order follows tool dependencies: things that produce a tool come before things that consume it. `install-brew.sh` is a special case worth flagging: brew internally calls `sudo -k` as a safety measure (it refuses to run as root and clears any lingering authorization to enforce that). On a shared TTY that would kill the parent shell's sudo cache and force a second password prompt at Tweaks. To keep the single-prompt invariant, `install-brew.sh` wraps `brew bundle` in `script(1)`, giving brew its own pseudo-TTY; with sudo's default `tty_tickets=on`, the cache is keyed by TTY, so brew's `sudo -k` only clears the (empty) PTY timestamp and the parent cache stays alive.
 
