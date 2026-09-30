@@ -131,6 +131,12 @@ The two link trees mirror each other in shape but differ in what they symlink. `
 
 Each tree additionally has OS-scoped siblings (`file-links.linux/`, `file-links.darwin/`, same for `dir-links`): content there is linked only when `uname` matches, so an OS-specific config (kitty on Linux, for example) never shows up as a meaningless symlink on the other OS. The linkers walk the common tree plus the matching OS tree per repo; the conflict precheck covers all trees active on the current OS, while the same destination in `.linux` and `.darwin` is deliberately legal (per-OS variants of one config).
 
+### Agent instructions and skills
+
+The project `CLAUDE.md` imports `~/agents/peter/persona.md`. The global Claude instructions live in `file-links/claude/CLAUDE.md` and link to `~/.claude/CLAUDE.md`.
+
+The selected skills are stored once under `dir-links/agents/skills`, linked to `~/.agents/skills`. `dir-links/claude/skills` is a relative alias to that directory, so Claude sees the same files under `~/.claude/skills`. The directory linker and its conflict precheck include aliases to directories. Skill-local templates are included; shared conventions, prompts and tools referenced under `~/agents` come with the agent-framework.
+
 ### Layer 5: One command updates everything
 
 A single command upgrades every package manager, framework, and runtime registered in this setup:

@@ -86,7 +86,7 @@ for repo_dir in "${REPO_DIRS[@]}"; do
       while IFS= read -r -d '' subdir; do
         rel="${subdir#"$src_dir"/}"
         echo "    $rel/"
-      done < <(find "$src_dir" -mindepth 1 -maxdepth 1 -type d -print0 | sort -z)
+      done < <(find -L "$src_dir" -mindepth 1 -maxdepth 1 -type d -print0 | sort -z)
     done
   done
 done
@@ -140,7 +140,7 @@ for repo_dir in "${REPO_DIRS[@]}"; do
       while IFS= read -r -d '' subdir; do
         rel="${subdir#"$src_dir"/}"
         link_dir "$subdir" "$dest/$rel"
-      done < <(find "$src_dir" -mindepth 1 -maxdepth 1 -type d -print0)
+      done < <(find -L "$src_dir" -mindepth 1 -maxdepth 1 -type d -print0)
     done
   done
 done

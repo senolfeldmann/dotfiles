@@ -82,8 +82,8 @@ precheck_no_conflicts() {
   done
 
   # Collect every top-level directory under each active dir-links tree's
-  # <target>/. Only first-level directories are linkable units; nested
-  # content lives inside the linked directory.
+  # <target>/, including symlink aliases to directories. Only first-level
+  # directories are linkable units; nested content lives inside them.
   set_link_source_trees "$repo_dir" dir-links
   for tree in ${LINK_SOURCE_TREES[@]+"${LINK_SOURCE_TREES[@]}"}; do
     for target in "${TARGET_NAMES[@]}"; do
@@ -95,7 +95,7 @@ precheck_no_conflicts() {
         types+=("d")
         sources+=("$entry")
         dests+=("$dest")
-      done < <(find "$src_dir" -mindepth 1 -maxdepth 1 -type d -print0)
+      done < <(find -L "$src_dir" -mindepth 1 -maxdepth 1 -type d -print0)
     done
   done
 
