@@ -174,7 +174,3 @@ export SAVEHIST=$HISTSIZE
 setopt EXTENDED_HISTORY
 
 eval "$($(brew --prefix)/bin/mise activate zsh)"
-
-### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
-export PATH="/Users/senol/.rd/bin:$PATH"
-### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
