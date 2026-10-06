@@ -172,7 +172,7 @@
       <key code="23" output="%" />
       <key code="24" output="+" />
       <key code="25" output="(" />
-      <key code="26" output="&amp;" />
+      <key code="26" output="&#x26;" />
       <key code="27" output="_" />
       <key code="28" output="*" />
       <key code="29" output=")" />
@@ -185,15 +185,15 @@
       <key code="36" output="&#xD;" />
       <key code="37" output="L" />
       <key code="38" action="compose_j_1" />
-      <key code="39" output="&quot;" />
+      <key code="39" output="&#x22;" />
       <key code="40" output="K" />
       <key code="41" output=":" />
       <key code="42" output="|" />
-      <key code="43" output="&lt;" />
+      <key code="43" output="&#x3C;" />
       <key code="44" output="?" />
       <key code="45" action="compose_1_45" />
       <key code="46" output="M" />
-      <key code="47" output="&gt;" />
+      <key code="47" output="&#x3E;" />
       <key code="48" output="&#x9;" />
       <key code="49" action="compose_1_49" />
       <key code="50" output="~" />

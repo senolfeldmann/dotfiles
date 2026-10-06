@@ -15,6 +15,8 @@ This macOS keyboard layout uses the U.S. input source's key outputs, with only t
 | D | ş | Ş |
 | C | ç | Ç |
 
+Use numeric character references (`&#x22;`, `&#x26;`, `&#x3C;`, `&#x3E;`) for XML-special output characters. On macOS 27.0.1, the named entities `&quot;`, `&amp;`, `&lt;`, and `&gt;` compile to empty Shift-key outputs in this layout, despite being valid XML.
+
 The U.S. Option layer otherwise remains available, including Option+4 = ¢ and Shift+Option+2 = €. Option+E, Option+N, and Option+backtick remain dead keys for acute, tilde, and grave accents. Option+I and Option+U produce letters directly.
 
 `../../../scripts/tweaks/macos-keyboard-layout.sh` installs the bundle. After installation, select `US German Turkish` as an input source in macOS Keyboard settings and log out and back in if an open application still uses the previous layout.
