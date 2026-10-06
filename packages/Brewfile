@@ -44,6 +44,7 @@ brew "hf"
 tap "anomalyco/tap", trusted: { formula: "opencode" }
 brew "anomalyco/tap/opencode"
 cask "chatgpt" if OS.mac?
+cask "claude" if OS.mac?
 cask "codex" if OS.mac?
 cask "handy" if OS.mac?
 cask "lm-studio" if OS.mac?
